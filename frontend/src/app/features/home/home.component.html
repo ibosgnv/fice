@@ -1,0 +1,341 @@
+<div class="home">
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="header-brand">
+      <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
+      <div>
+        <span class="brand-name">FICE</span>
+        <span class="brand-tagline">Coopérative d'Épargne</span>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="#accueil" class="site-nav__item site-nav__item--active">{{ 'nav.particuliers' | t }}</a>
+      <a href="#epargne" class="site-nav__item">{{ 'nav.epargne' | t }}</a>
+      <a href="#simulateur" class="site-nav__item">{{ 'nav.credits' | t }}</a>
+      <a href="#app"     class="site-nav__item">{{ 'nav.app' | t }}</a>
+      <a href="#coopera" class="site-nav__item">{{ 'nav.coopera' | t }}</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="header-link"><mat-icon>location_on</mat-icon> {{ 'nav.agences' | t }}</a>
+      <a href="#contact" class="header-link"><mat-icon>help_outline</mat-icon> {{ 'nav.aide' | t }}</a>
+      <app-lang-switcher />
+      <a mat-raised-button color="primary" routerLink="/connexion" class="btn-login-header">
+        <mat-icon>login</mat-icon> {{ 'nav.espace' | t }}
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Banner utilisateur connecté (BLOC 9) ── -->
+  @if (isLoggedIn && currentUser()) {
+    <div class="user-banner">
+      <span class="material-icons-round">waving_hand</span>
+      <span>{{ 'banner.bonjour' | t }} <strong>{{ currentUser()?.prenom }}</strong></span>
+      <a routerLink="/espace-membre" class="user-banner__cta">{{ 'banner.cta' | t }}</a>
+    </div>
+  }
+
+  <!-- ── Hero banner (BLOC 1 — pattern géométrique) ── -->
+  <section class="hero-banner" id="accueil">
+    <div class="hero-banner__content">
+      <p class="hero-banner__eyebrow">{{ 'hero.eyebrow' | t }}</p>
+      <h1>{{ 'hero.title' | t }}</h1>
+      <p class="hero-banner__sub">{{ 'hero.sub' | t }}</p>
+      <div class="hero-banner__actions">
+        <a mat-raised-button routerLink="/connexion" class="hero-btn-cta">{{ 'hero.cta' | t }}</a>
+        <a mat-button href="#" class="hero-btn-secondary">{{ 'hero.membre' | t }}</a>
+      </div>
+    </div>
+    <div class="hero-banner__visual" aria-hidden="true">
+      <div class="hero-mockup">
+        <div class="hero-mockup__header">FICE · {{ 'portal.titre' | t }}</div>
+        <div class="mockup-row">
+          <span class="material-icons-round">savings</span>
+          <div><p class="mockup-label">{{ 'hero.epargne' | t }}</p><p class="mockup-val">847 500 FC</p></div>
+        </div>
+        <div class="mockup-divider"></div>
+        <div class="mockup-row">
+          <span class="material-icons-round">credit_score</span>
+          <div><p class="mockup-label">{{ 'hero.credit' | t }}</p><p class="mockup-val">1 625 000 FC</p></div>
+        </div>
+        <div class="mockup-divider"></div>
+        <div class="mockup-row">
+          <span class="material-icons-round">groups</span>
+          <div><p class="mockup-label">{{ 'hero.parts' | t }}</p><p class="mockup-val">5 parts</p></div>
+        </div>
+        <a routerLink="/connexion" class="mockup-cta">{{ 'hero.consulter' | t }}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services rapides ── -->
+  <section class="services-strip" id="services">
+    <div class="container">
+      <div class="services-grid">
+        @for (s of services; track s.key) {
+          <a [href]="s.route.startsWith('#') ? s.route : null"
+             [routerLink]="s.route.startsWith('/') ? s.route : null"
+             class="service-tile">
+            <div class="service-tile__icon"><mat-icon>{{ s.icon }}</mat-icon></div>
+            <span class="service-tile__label">{{ s.key | t }}</span>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 3 : Offres du moment ── -->
+  <section class="promo-section" id="epargne">
+    <div class="container">
+      <h2 class="section-title">{{ 'promo.titre' | t }}</h2>
+      <div class="promo-grid">
+        @for (p of promos; track p.titreKey) {
+          <div class="promo-card">
+            <div class="promo-card__visual" [style.background]="p.color">
+              <span class="material-icons-round">{{ p.icon }}</span>
+            </div>
+            <div class="promo-card__body">
+              <h3>{{ p.titreKey | t }}</h3>
+              <p>{{ p.descKey | t }}</p>
+              <a [href]="p.route.startsWith('#') ? p.route : null"
+                 [routerLink]="p.route.startsWith('/') ? p.route : null"
+                 class="promo-card__cta">
+                {{ p.ctaKey | t }} <mat-icon>chevron_right</mat-icon>
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 2 : Compteurs animés ── -->
+  <section class="counters-section">
+    @for (c of counters; track c.labelKey) {
+      <div class="counter-item">
+        <p class="counter-value">{{ c.display }}</p>
+        <p class="counter-label">{{ c.labelKey | t }}</p>
+      </div>
+    }
+  </section>
+
+  <!-- ── Avantages ── -->
+  <section class="advantages">
+    <div class="container">
+      <div class="advantages-grid">
+        @for (a of advantages; track a.titreKey) {
+          <div class="advantage-card">
+            <div class="advantage-card__icon"><mat-icon>{{ a.icon }}</mat-icon></div>
+            <h3>{{ a.titreKey | t }}</h3>
+            <p>{{ a.descKey | t }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 7 : Simulateur de crédit ── -->
+  <div id="simulateur">
+    <app-credit-simulator />
+  </div>
+
+  <!-- ── Segments ── -->
+  <section class="segments" id="credits">
+    <div class="container">
+      <h2 class="section-title">{{ 'seg.title' | t }}</h2>
+      <div class="segments-grid">
+        @for (seg of segments; track seg.titreKey) {
+          <a href="#" class="segment-card">
+            <div class="segment-card__icon"><mat-icon>{{ seg.icon }}</mat-icon></div>
+            <div class="segment-card__body">
+              <h3>{{ seg.titreKey | t }}</h3>
+              <p>{{ seg.descKey | t }}</p>
+            </div>
+            <mat-icon class="segment-card__arrow">arrow_forward</mat-icon>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 4 : Témoignages ── -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header-centered">
+        <h2>{{ 'testi.titre' | t }}</h2>
+        <p>{{ 'testi.subtitle' | t }}</p>
+      </div>
+      <div class="testimonials-grid">
+        @for (testi of testimonials; track testi.nomKey) {
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">{{ testi.texteKey | t }}</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" [style.background]="testi.color">{{ testi.initials }}</div>
+              <div>
+                <p class="testimonial-nom">{{ testi.nomKey | t }}</p>
+                <p class="testimonial-role">{{ testi.roleKey | t }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 5 : Actualités ── -->
+  <section class="news-section" id="news">
+    <div class="container">
+      <div class="news-header">
+        <h2 class="section-title">{{ 'news.titre' | t }}</h2>
+        <a href="#" class="news-voir-tout">{{ 'news.voir' | t }}</a>
+      </div>
+      <div class="news-grid">
+        @for (article of news; track article.titreKey) {
+          <article class="news-card">
+            <div class="news-card__visual" [style.background]="article.color">
+              <span class="material-icons-round" [style.color]="article.iconColor">{{ article.icon }}</span>
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__cat">{{ article.catKey | t }}</span>
+              <h3>{{ article.titreKey | t }}</h3>
+              <p>{{ article.descKey | t }}</p>
+              <a href="#" class="news-card__lien">{{ 'news.lire' | t }}</a>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOC 6 : Impact RSE ── -->
+  <section class="impact-section">
+    <div class="container impact-layout">
+      <div class="impact-content">
+        <p class="section-tag">{{ 'nav.coopera' | t }}</p>
+        <h2>{{ 'impact.titre' | t }}</h2>
+        <p>{{ 'impact.subtitle' | t }}</p>
+        <a href="#" class="impact-cta">{{ 'impact.cta' | t }}</a>
+      </div>
+      <div class="impact-stats">
+        @for (stat of impactStats; track stat.valKey) {
+          <div class="impact-stat">
+            <mat-icon class="impact-stat__icon">{{ stat.icon }}</mat-icon>
+            <p class="impact-stat__val">{{ stat.valKey | t }}</p>
+            <p class="impact-stat__label">{{ stat.labelKey | t }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── App mobile ── -->
+  <section class="app-section" id="app">
+    <div class="container app-section__inner">
+      <div class="app-section__content">
+        <p class="section-tag">{{ 'app.tag' | t }}</p>
+        <h2>{{ 'app.title' | t }}</h2>
+        <p>{{ 'app.desc' | t }}</p>
+        <div class="app-badges">
+          <a href="#" class="app-badge">
+            <mat-icon>phone_android</mat-icon>
+            <div><span>{{ 'app.dispo' | t }}</span><strong>{{ 'app.google' | t }}</strong></div>
+          </a>
+          <a href="#" class="app-badge">
+            <mat-icon>phone_iphone</mat-icon>
+            <div><span>{{ 'app.dispo' | t }}</span><strong>{{ 'app.apple' | t }}</strong></div>
+          </a>
+        </div>
+      </div>
+      <div class="app-section__stats">
+        <div class="app-stat">
+          <p class="app-stat__value">{{ 'app.stat1' | t }}</p>
+          <p class="app-stat__label">{{ 'app.stat1.label' | t }}</p>
+        </div>
+        <div class="app-stat">
+          <p class="app-stat__value">{{ 'app.stat2' | t }}</p>
+          <p class="app-stat__label">{{ 'app.stat2.label' | t }}</p>
+        </div>
+        <div class="app-stat">
+          <p class="app-stat__value">{{ 'app.stat3' | t }}</p>
+          <p class="app-stat__label">{{ 'app.stat3.label' | t }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <mat-icon>location_on</mat-icon>
+        <div>
+          <h3>{{ 'contact.agence.titre' | t }}</h3>
+          <p>{{ 'contact.agence.desc' | t }}</p>
+          <a href="#">{{ 'contact.agence.lien' | t }}</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <mat-icon>phone</mat-icon>
+        <div>
+          <h3>{{ 'contact.tel.titre' | t }}</h3>
+          <p>{{ 'contact.tel.desc' | t }}</p>
+          <a href="tel:+243800000000">+243 800 000 000</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <mat-icon>calendar_month</mat-icon>
+        <div>
+          <h3>{{ 'contact.rdv.titre' | t }}</h3>
+          <p>{{ 'contact.rdv.desc' | t }}</p>
+          <a href="#">{{ 'contact.rdv.lien' | t }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer" id="coopera">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <div class="brand-icon-sm"><span class="material-icons-round">account_balance</span></div>
+        <div>
+          <p class="footer-brand-name">FICE</p>
+          <p class="footer-brand-desc">{{ 'footer.desc' | t }}</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <p class="footer-col-title">{{ 'footer.produits' | t }}</p>
+          <a href="#">{{ 'services.ouvrir' | t }}</a>
+          <a href="#">{{ 'services.epargner' | t }}</a>
+          <a href="#">{{ 'services.emprunter' | t }}</a>
+          <a href="#">{{ 'services.parts' | t }}</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">{{ 'footer.coopera' | t }}</p>
+          <a href="#">Qui sommes-nous</a>
+          <a href="#">Gouvernance</a>
+          <a href="#contact">Agences</a>
+          <a href="#">Actualités</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">{{ 'footer.support' | t }}</p>
+          <a href="#">{{ 'services.aide' | t }}</a>
+          <a href="#">{{ 'contact.rdv.titre' | t }}</a>
+          <a href="#">Faire opposition</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">{{ 'footer.legal' | t }}</p>
+          <a href="#">Mentions légales</a>
+          <a href="#">Protection des données</a>
+          <a href="#">CGU</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <span>{{ 'footer.copy' | t }}</span>
+    </div>
+  </footer>
+
+</div>

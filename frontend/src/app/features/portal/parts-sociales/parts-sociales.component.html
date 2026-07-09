@@ -1,0 +1,84 @@
+<div class="page-header">
+  <h1>{{ 'parts.titre' | t }}</h1>
+  <p>{{ 'parts.subtitle' | t }}</p>
+</div>
+
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+} @else if (membre) {
+  <div class="parts-grid">
+    <div class="fice-card parts-hero">
+      <div class="parts-hero__icon"><span class="material-icons-round">groups</span></div>
+      <div class="parts-hero__body">
+        <p class="parts-label">{{ 'parts.nb' | t }}</p>
+        <p class="parts-count">{{ membre.nombrePartsSociales }}</p>
+        <p class="parts-valeur">{{ 'parts.valeur.totale' | t }} {{ valeurTotale | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+      </div>
+    </div>
+
+    <div class="fice-card member-info-card">
+      <h3>{{ 'parts.info' | t }}</h3>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label">{{ 'parts.num' | t }}</span>
+          <span class="info-value mono">{{ membre.numeroDeMembre }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{ 'parts.adhesion' | t }}</span>
+          <span class="info-value">{{ membre.dateAdhesion | date:'dd MMMM yyyy' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{ 'parts.statut' | t }}</span>
+          <span class="badge badge--success">{{ ('statut.' + membre.statut.toLowerCase()) | t }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">{{ 'parts.valeur.part' | t }}</span>
+          <span class="info-value">{{ valeurPart | currency:'CDF':'FC ':'1.0-0':'fr' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fice-card objectif-card">
+      <h3>{{ 'parts.objectif' | t }}</h3>
+      <p class="text-secondary">{{ 'parts.objectif.sub' | t }} {{ objectifParts }} {{ 'parts.objectif.parts' | t }}</p>
+      <div class="objectif-progress">
+        <div class="objectif-labels">
+          <span class="fw-600">{{ membre.nombrePartsSociales }} / {{ objectifParts }} {{ 'parts.objectif.parts' | t }}</span>
+          <span class="text-secondary">{{ progressObjectif | number:'1.0-0' }}%</span>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="progressObjectif" color="accent" class="objectif-bar"></mat-progress-bar>
+      </div>
+      <div class="parts-restantes">
+        <span class="material-icons-round">info_outline</span>
+        <span>{{ objectifParts - membre.nombrePartsSociales }} {{ 'parts.restantes' | t }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fice-card avantages-card">
+    <h3>{{ 'parts.avantages' | t }}</h3>
+    <div class="avantages-list">
+      <div class="avantage-item">
+        <span class="material-icons-round avantage-icon">how_to_vote</span>
+        <div>
+          <p class="avantage-title">{{ 'parts.vote.titre' | t }}</p>
+          <p class="text-secondary avantage-desc">{{ 'parts.vote.desc' | t }}</p>
+        </div>
+      </div>
+      <div class="avantage-item">
+        <span class="material-icons-round avantage-icon">trending_up</span>
+        <div>
+          <p class="avantage-title">{{ 'parts.dividende.titre' | t }}</p>
+          <p class="text-secondary avantage-desc">{{ 'parts.dividende.desc' | t }}</p>
+        </div>
+      </div>
+      <div class="avantage-item">
+        <span class="material-icons-round avantage-icon">verified_user</span>
+        <div>
+          <p class="avantage-title">{{ 'parts.pref.titre' | t }}</p>
+          <p class="text-secondary avantage-desc">{{ 'parts.pref.desc' | t }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+}

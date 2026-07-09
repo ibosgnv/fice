@@ -1,0 +1,54 @@
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  max-width: 360px;
+  width: 100%;
+}
+
+.membres-table { width: 100%; }
+
+.membre-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.avatar {
+  width: 38px; height: 38px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.membre-name { margin: 0 0 2px; font-weight: 600; font-size: 0.9rem; }
+.membre-num  { margin: 0; font-size: 0.75rem; font-family: monospace; }
+.text-sm     { font-size: 0.82rem; margin: 0 0 2px; &:last-child { margin-bottom: 0; } }
+.text-center { text-align: center; }
+
+.parts-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  background: #fff8e1;
+  color: #e65100;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.membre-row { cursor: pointer; }
+
+.empty-state { text-align: center; padding: 40px; }

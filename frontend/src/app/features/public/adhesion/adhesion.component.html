@@ -1,0 +1,132 @@
+<div class="public-page">
+  <div class="public-header">
+    <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <app-lang-switcher />
+      <a routerLink="/connexion" mat-button>Déjà membre ?</a>
+    </div>
+  </div>
+
+  <div class="public-content">
+    <div class="page-header">
+      <h1>{{ 'promo.3.cta' | t }}</h1>
+      <p>Rejoignez la FICE et accédez à nos services d'épargne et de crédit</p>
+    </div>
+
+    @if (!submitted) {
+      <mat-stepper orientation="horizontal" linear #stepper class="adhesion-stepper">
+
+        <!-- Étape 1 : Informations personnelles -->
+        <mat-step [stepControl]="step1" label="Vos informations">
+          <form [formGroup]="step1" class="step-form">
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="prenom">
+                <mat-error>Requis</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="nom">
+                <mat-error>Requis</mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse e-mail</mat-label>
+              <input matInput type="email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput formControlName="telephone" placeholder="+243 …">
+            </mat-form-field>
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Date de naissance</mat-label>
+                <input matInput type="date" formControlName="dateNaissance">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Ville</mat-label>
+                <input matInput formControlName="ville">
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse complète</mat-label>
+              <input matInput formControlName="adresse">
+            </mat-form-field>
+            <div class="step-actions">
+              <button mat-raised-button color="primary" matStepperNext [disabled]="step1.invalid">Suivant →</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Étape 2 : Document d'identité -->
+        <mat-step [stepControl]="step2" label="Pièce d'identité">
+          <form [formGroup]="step2" class="step-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Type de document</mat-label>
+              <mat-select formControlName="typeDocument">
+                <mat-option value="CNI">Carte Nationale d'Identité</mat-option>
+                <mat-option value="PASSEPORT">Passeport</mat-option>
+                <mat-option value="PERMIS">Permis de conduire</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Numéro du document</mat-label>
+              <input matInput formControlName="numeroDocument">
+            </mat-form-field>
+            <div class="upload-zone">
+              <mat-icon>cloud_upload</mat-icon>
+              <p>Téléchargez une copie de votre document</p>
+              <p class="text-secondary text-sm">PDF, JPG ou PNG — max 5 Mo</p>
+              <button mat-stroked-button type="button">Choisir un fichier</button>
+            </div>
+            <div class="confirm-check">
+              <input type="checkbox" formControlName="acceptTermes" id="termes">
+              <label for="termes">J'accepte les <a href="#">conditions générales d'adhésion</a> de la FICE</label>
+            </div>
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>← Retour</button>
+              <button mat-raised-button color="primary" matStepperNext [disabled]="step2.invalid">Suivant →</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Étape 3 : Parts sociales -->
+        <mat-step [stepControl]="step3" label="Parts sociales">
+          <form [formGroup]="step3" class="step-form">
+            <div class="parts-info">
+              <mat-icon>info_outline</mat-icon>
+              <p>Chaque part sociale vaut <strong>5 000 FC</strong>. Le minimum est de <strong>1 part</strong>.</p>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre de parts souhaitées</mat-label>
+              <input matInput type="number" formControlName="nombreParts" min="1" max="100">
+            </mat-form-field>
+            <div class="montant-total">
+              <span>Montant total</span>
+              <strong>{{ montantTotal | number:'1.0-0':'fr' }} FC</strong>
+            </div>
+            @if (errorMessage) {
+              <p class="error-text">{{ errorMessage }}</p>
+            }
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>← Retour</button>
+              <button mat-raised-button color="primary" [disabled]="step3.invalid || loading" (click)="submit()">
+                {{ loading ? 'Envoi…' : 'Soumettre ma demande' }}
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+      </mat-stepper>
+    } @else {
+      <div class="fice-card success-card">
+        <mat-icon>check_circle</mat-icon>
+        <h2>Demande envoyée !</h2>
+        <p>Votre demande d'adhésion a été soumise avec succès. Un conseiller FICE vous contactera dans les 48h ouvrées pour finaliser votre dossier.</p>
+        <p class="ref">Référence : <strong>{{ numeroDossier }}</strong></p>
+        <a routerLink="/" mat-raised-button color="primary">Retour à l'accueil</a>
+      </div>
+    }
+  </div>
+</div>

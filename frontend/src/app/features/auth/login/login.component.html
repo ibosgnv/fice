@@ -1,0 +1,103 @@
+<div class="login-page">
+
+  <header class="login-header">
+    <div class="login-header__brand">
+      <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
+      <span class="brand-name">FICE</span>
+    </div>
+    <div class="login-header__right">
+      <nav class="login-header__nav">
+        <a href="#">{{ 'nav.agences' | t }}</a>
+        <a href="#">{{ 'nav.aide' | t }}</a>
+      </nav>
+      <app-lang-switcher />
+    </div>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <div class="login-card__heading">
+        <h1>{{ 'login.titre' | t }}</h1>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'login.email' | t }}</mat-label>
+          <mat-icon matPrefix>mail_outline</mat-icon>
+          <input matInput type="email" formControlName="email" autocomplete="email">
+          @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+            <mat-error>Adresse e-mail invalide</mat-error>
+          }
+          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+            <mat-error>L'e-mail est requis</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'login.mdp' | t }}</mat-label>
+          <mat-icon matPrefix>lock_outline</mat-icon>
+          <input matInput [type]="hidePassword ? 'password' : 'text'"
+                 formControlName="motDePasse" autocomplete="current-password">
+          <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.get('motDePasse')?.hasError('required') && form.get('motDePasse')?.touched) {
+            <mat-error>Le mot de passe est requis</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="forgot-link">
+          <a href="#">{{ 'login.mdp.oublie' | t }}</a>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit"
+                class="btn-login" [disabled]="form.invalid || loading">
+          @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
+          @else { {{ 'login.btn' | t }} }
+        </button>
+      </form>
+
+      <div class="security-notice">
+        <mat-icon>lock</mat-icon>
+        <span>{{ 'login.securite' | t }}</span>
+      </div>
+
+      <div class="demo-hint">
+        <p><strong>{{ 'login.demo.membre' | t }}</strong> amara.diallo&#64;email.com / membre123</p>
+        <p><strong>{{ 'login.demo.agent' | t }}</strong> agent&#64;fice.coop / agent123</p>
+      </div>
+    </div>
+
+    <div class="login-aside">
+      <div class="aside-block">
+        <mat-icon class="aside-icon">shield</mat-icon>
+        <div>
+          <p class="aside-title">{{ 'login.aside.sec.titre' | t }}</p>
+          <p class="aside-desc">{{ 'login.aside.sec.desc' | t }}</p>
+        </div>
+      </div>
+      <div class="aside-block">
+        <mat-icon class="aside-icon">support_agent</mat-icon>
+        <div>
+          <p class="aside-title">{{ 'login.aside.aide.titre' | t }}</p>
+          <p class="aside-desc">{{ 'login.aside.aide.desc' | t }} <strong>+243 800 000 000</strong>.</p>
+        </div>
+      </div>
+      <div class="aside-block aside-block--alert">
+        <mat-icon class="aside-icon">credit_card_off</mat-icon>
+        <div>
+          <p class="aside-title">{{ 'login.aside.opp.titre' | t }}</p>
+          <a href="#" class="aside-link">{{ 'login.aside.opp.lien' | t }}</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="login-footer">
+    <a href="#">{{ 'login.footer.legal' | t }}</a>
+    <a href="#">{{ 'login.footer.data' | t }}</a>
+    <a href="#">{{ 'login.footer.access' | t }}</a>
+    <span>{{ 'login.copy' | t }}</span>
+  </footer>
+
+</div>

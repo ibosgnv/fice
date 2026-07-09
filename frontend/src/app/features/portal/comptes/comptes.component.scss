@@ -1,0 +1,127 @@
+.comptes-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comptes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.compte-card {
+  background: white;
+  border-radius: var(--radius-card);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+
+  &:hover { box-shadow: var(--shadow-card-hover); }
+
+  &--selected {
+    border-color: var(--color-primary);
+    background: #F8FAFC;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+.compte-icon {
+  width: 40px;
+  height: 40px;
+  background: #F1F5F9;
+  color: var(--color-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .material-icons-round { font-size: 20px; }
+}
+
+.compte-type {
+  margin: 0 0 2px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.compte-num {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  font-family: monospace;
+}
+
+.compte-solde {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.compte-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-sm { font-size: 0.78rem; }
+.text-right { text-align: right; }
+
+// ─── Transactions panel ───────────────────────────────────────────────────────
+.transactions-panel { padding: 24px; }
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 600; }
+}
+
+.transactions-table {
+  width: 100%;
+}
+
+.tx-libelle-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0;
+}
+
+.tx-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: fit-content;
+
+  &--in  { background: #e8f5e9; color: #2e7d32; }
+  &--out { background: #ffebee; color: #c62828; }
+}
+
+.tx-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+}

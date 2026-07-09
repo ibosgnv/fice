@@ -1,0 +1,234 @@
+.login-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+.login-header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 28px;
+
+    a {
+      font-size: 0.875rem;
+      color: #424242;
+      text-decoration: none;
+      &:hover { color: var(--color-primary); text-decoration: underline; }
+    }
+  }
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  background: var(--color-primary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .material-icons-round { color: white; font-size: 18px; }
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+.login-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 48px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 24px 16px;
+  }
+}
+
+// ─── Card formulaire ──────────────────────────────────────────────────────────
+.login-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 32px;
+  width: 100%;
+  max-width: 440px;
+  flex-shrink: 0;
+
+  &__heading {
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid var(--color-primary);
+
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #212121;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.forgot-link {
+  text-align: right;
+  margin: -4px 0 12px;
+
+  a {
+    font-size: 0.82rem;
+    color: var(--color-primary);
+    text-decoration: underline;
+    &:hover { color: var(--color-primary-light); }
+  }
+}
+
+.btn-login {
+  width: 100%;
+  height: 44px;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  border-radius: 3px !important;
+  letter-spacing: 0.2px;
+}
+
+.security-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  color: #616161;
+
+  mat-icon { font-size: 16px; width: 16px; height: 16px; color: var(--color-primary); }
+}
+
+.demo-hint {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fffde7;
+  border-left: 3px solid var(--color-accent);
+  border-radius: 2px;
+
+  p {
+    margin: 0 0 3px;
+    font-size: 0.78rem;
+    color: #424242;
+    &:last-child { margin: 0; }
+    strong { color: #212121; }
+  }
+}
+
+// ─── Aside ────────────────────────────────────────────────────────────────────
+.login-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  flex: 1;
+
+  @media (max-width: 768px) { width: 100%; }
+}
+
+.aside-block {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  &--alert {
+    border-left: 3px solid #e53935;
+  }
+}
+
+.aside-icon {
+  color: var(--color-primary);
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.aside-block--alert .aside-icon { color: #e53935; }
+
+.aside-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #212121;
+  margin: 0 0 4px;
+}
+
+.aside-desc {
+  font-size: 0.8rem;
+  color: #616161;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.aside-link {
+  font-size: 0.82rem;
+  color: #e53935;
+  font-weight: 500;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.login-footer {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 14px 40px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  a, span {
+    font-size: 0.78rem;
+    color: #757575;
+  }
+
+  a {
+    text-decoration: underline;
+    &:hover { color: var(--color-primary); }
+  }
+
+  span { margin-left: auto; }
+}

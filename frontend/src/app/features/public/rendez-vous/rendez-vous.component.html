@@ -1,0 +1,83 @@
+<div class="public-page">
+  <div class="public-header">
+    <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <app-lang-switcher />
+      <a routerLink="/" mat-button>← Accueil</a>
+    </div>
+  </div>
+
+  <div class="public-content">
+    <div class="page-header">
+      <h1>{{ 'contact.rdv.titre' | t }}</h1>
+      <p>{{ 'contact.rdv.desc' | t }}</p>
+    </div>
+
+    <div class="fice-card form-card">
+      @if (!submitted) {
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form-fields">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="prenom">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="nom">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Téléphone</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input matInput formControlName="telephone" placeholder="+243 …">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Agence souhaitée</mat-label>
+            <mat-select formControlName="agence">
+              @for (a of agences; track a) {
+                <mat-option [value]="a">{{ a }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Motif du rendez-vous</mat-label>
+            <mat-select formControlName="motif">
+              @for (m of motifs; track m) {
+                <mat-option [value]="m">{{ m }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Date souhaitée</mat-label>
+              <mat-icon matPrefix>calendar_today</mat-icon>
+              <input matInput type="date" formControlName="date">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Heure</mat-label>
+              <mat-select formControlName="heure">
+                @for (h of heures; track h) {
+                  <mat-option [value]="h">{{ h }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          @if (errorMessage) {
+            <p class="error-text">{{ errorMessage }}</p>
+          }
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading" style="height:44px;border-radius:3px">
+            {{ loading ? 'Confirmation…' : 'Confirmer le rendez-vous' }}
+          </button>
+        </form>
+      } @else {
+        <div class="success-state">
+          <mat-icon>event_available</mat-icon>
+          <h2>Rendez-vous confirmé !</h2>
+          <p>Votre rendez-vous à l'agence <strong>{{ form.value.agence }}</strong> le <strong>{{ form.value.date | date:'dd/MM/yyyy' }}</strong> à <strong>{{ form.value.heure }}</strong> a été enregistré.</p>
+          <p class="ref">Référence : <strong>{{ reference }}</strong></p>
+          <a routerLink="/" mat-stroked-button color="primary">Retour à l'accueil</a>
+        </div>
+      }
+    </div>
+  </div>
+</div>

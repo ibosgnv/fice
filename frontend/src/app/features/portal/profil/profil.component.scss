@@ -1,0 +1,36 @@
+.profil-layout { display: flex; flex-direction: column; gap: 24px; }
+
+.profil-id-card {
+  display: flex; align-items: center; gap: 20px;
+}
+
+.profil-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--color-primary); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; font-weight: 700; flex-shrink: 0;
+}
+
+.profil-info {
+  h2 { margin: 0 0 4px; font-size: 1.2rem; font-weight: 700; }
+  p  { margin: 0 0 3px; font-size: 0.875rem; }
+}
+
+.profil-tabs { }
+
+.tab-form {
+  padding: 24px 0;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+mat-form-field { width: 100%; }

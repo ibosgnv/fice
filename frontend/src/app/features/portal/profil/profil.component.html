@@ -1,0 +1,92 @@
+<div class="page-header">
+  <h1>{{ 'portal.profil' | t }}</h1>
+  <p>Gérez vos informations personnelles</p>
+</div>
+
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+} @else if (membre) {
+  <div class="profil-layout">
+
+    <!-- Carte identité -->
+    <div class="fice-card profil-id-card">
+      <div class="profil-avatar">{{ membre.prenom.charAt(0) }}{{ membre.nom.charAt(0) }}</div>
+      <div class="profil-info">
+        <h2>{{ membre.prenom }} {{ membre.nom }}</h2>
+        <p class="text-secondary mono">{{ membre.numeroDeMembre }}</p>
+        <p class="text-secondary">{{ membre.email }}</p>
+        <p class="text-secondary">Membre depuis {{ membre.dateAdhesion | date:'MMMM yyyy' }}</p>
+        <span class="badge badge--success mt-4">{{ membre.statut }}</span>
+      </div>
+    </div>
+
+    <mat-tab-group color="primary" class="profil-tabs">
+
+      <!-- Infos personnelles -->
+      <mat-tab label="Informations personnelles">
+        <div class="tab-form">
+          <form [formGroup]="infoForm" (ngSubmit)="saveInfo()">
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Prénom</mat-label>
+                <input matInput [value]="membre.prenom" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input matInput [value]="membre.nom" readonly>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput [value]="membre.email" readonly>
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <mat-icon matPrefix>phone</mat-icon>
+              <input matInput formControlName="telephone">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse</mat-label>
+              <input matInput formControlName="adresse">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="ville">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="saving">
+              {{ saving ? 'Enregistrement…' : 'Enregistrer les modifications' }}
+            </button>
+          </form>
+        </div>
+      </mat-tab>
+
+      <!-- Mot de passe -->
+      <mat-tab label="Mot de passe">
+        <div class="tab-form">
+          <form [formGroup]="pwdForm" (ngSubmit)="changePassword()">
+            <mat-form-field appearance="outline">
+              <mat-label>Mot de passe actuel</mat-label>
+              <input matInput type="password" formControlName="actuel">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Nouveau mot de passe</mat-label>
+              <input matInput type="password" formControlName="nouveau">
+              @if (pwdForm.get('nouveau')?.hasError('minlength')) {
+                <mat-error>Minimum 6 caractères</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmer le nouveau mot de passe</mat-label>
+              <input matInput type="password" formControlName="confirmation">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="pwdForm.invalid || saving">
+              {{ saving ? 'Modification…' : 'Changer le mot de passe' }}
+            </button>
+          </form>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+}

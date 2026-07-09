@@ -1,0 +1,112 @@
+<div class="back-row">
+  <a mat-button routerLink="/back-office/membres" color="primary">
+    <mat-icon>arrow_back</mat-icon> {{ 'bo.retour' | t }}
+  </a>
+</div>
+
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+} @else if (membre) {
+  <div class="fiche-header fice-card">
+    <div class="fiche-header__avatar">{{ membre.prenom.charAt(0) }}{{ membre.nom.charAt(0) }}</div>
+    <div class="fiche-header__info">
+      <h1>{{ membre.prenom }} {{ membre.nom }}</h1>
+      <p class="text-secondary mono">{{ membre.numeroDeMembre }}</p>
+      <p class="text-secondary">{{ membre.email }} · {{ membre.telephone }}</p>
+      <p class="text-secondary">{{ membre.adresse }}, {{ membre.ville }}</p>
+    </div>
+    <div class="fiche-header__meta">
+      <span class="badge badge--success" *ngIf="membre.statut === 'ACTIF'">{{ 'statut.actif' | t }}</span>
+      <span class="badge badge--warning" *ngIf="membre.statut === 'SUSPENDU'">{{ 'statut.suspendu' | t }}</span>
+      <p class="text-secondary mt-4">{{ membre.dateAdhesion | date:'MMMM yyyy' }}</p>
+      <p class="text-secondary">{{ membre.nombrePartsSociales }} {{ 'parts.objectif.parts' | t }}</p>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="fice-card kpi-mini">
+      <span class="material-icons-round kpi-mini__icon icon--green">savings</span>
+      <div>
+        <p class="kpi-mini__label">{{ 'bo.epargne' | t }}</p>
+        <p class="kpi-mini__value">{{ totalEpargne | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+      </div>
+    </div>
+    <div class="fice-card kpi-mini">
+      <span class="material-icons-round kpi-mini__icon icon--orange">credit_score</span>
+      <div>
+        <p class="kpi-mini__label">{{ 'bo.nb.credits' | t }}</p>
+        <p class="kpi-mini__value">{{ credits.length }}</p>
+      </div>
+    </div>
+    <div class="fice-card kpi-mini">
+      <span class="material-icons-round kpi-mini__icon icon--blue">account_balance_wallet</span>
+      <div>
+        <p class="kpi-mini__label">{{ 'bo.nb.comptes' | t }}</p>
+        <p class="kpi-mini__value">{{ comptes.length }}</p>
+      </div>
+    </div>
+  </div>
+
+  <mat-tab-group color="primary" class="fiche-tabs">
+    <mat-tab [label]="'bo.tab.comptes' | t">
+      <div class="tab-content">
+        @for (c of comptes; track c.id) {
+          <div class="item-row fice-card">
+            <span class="material-icons-round item-icon icon--green">{{ c.type === 'EPARGNE' ? 'savings' : 'account_balance_wallet' }}</span>
+            <div class="item-body">
+              <p class="item-title">{{ (c.type === 'EPARGNE' ? 'comptes.epargne' : 'comptes.courant') | t }}</p>
+              <p class="text-secondary mono text-sm">{{ c.numeroCompte }}</p>
+            </div>
+            <div class="item-right">
+              <p class="item-amount">{{ c.solde | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+              <span class="badge badge--success">{{ ('statut.' + c.statut.toLowerCase()) | t }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </mat-tab>
+
+    <mat-tab [label]="'bo.tab.credits' | t">
+      <div class="tab-content">
+        @for (cr of credits; track cr.id) {
+          <div class="item-row fice-card">
+            <span class="material-icons-round item-icon icon--orange">credit_score</span>
+            <div class="item-body">
+              <p class="item-title">{{ cr.objet }}</p>
+              <p class="text-secondary text-sm">{{ cr.referenceCredit }} · {{ cr.tauxInteret }}% / an</p>
+            </div>
+            <div class="item-right">
+              <p class="item-amount">{{ cr.soldeRestant | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+              <span class="badge" [class.badge--warning]="cr.statut === 'EN_COURS'" [class.badge--success]="cr.statut === 'REMBOURSE'">
+                {{ ('status.' + cr.statut.toLowerCase()) | t }}
+              </span>
+            </div>
+          </div>
+        } @empty {
+          <p class="empty-state text-secondary">{{ 'bo.aucun.credit' | t }}</p>
+        }
+      </div>
+    </mat-tab>
+
+    <mat-tab [label]="'bo.tab.ops' | t">
+      <div class="tab-content">
+        @for (tx of transactions; track tx.id) {
+          <div class="tx-row">
+            <div class="tx-icon-sm" [class.tx-icon-sm--in]="isCredit(tx.type)" [class.tx-icon-sm--out]="!isCredit(tx.type)">
+              <span class="material-icons-round">{{ isCredit(tx.type) ? 'arrow_downward' : 'arrow_upward' }}</span>
+            </div>
+            <div class="tx-body">
+              <p class="tx-libelle">{{ tx.libelle }}</p>
+              <p class="text-secondary text-sm">{{ tx.dateOperation | date:'dd/MM/yyyy' }} · {{ tx.reference }}</p>
+            </div>
+            <span [class.montant-positif]="isCredit(tx.type)" [class.montant-negatif]="!isCredit(tx.type)" class="tx-amount">
+              {{ isCredit(tx.type) ? '+' : '-' }}{{ tx.montant | currency:'CDF':'FC ':'1.0-0':'fr' }}
+            </span>
+          </div>
+        } @empty {
+          <p class="empty-state text-secondary">{{ 'bo.aucune.op' | t }}</p>
+        }
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+}

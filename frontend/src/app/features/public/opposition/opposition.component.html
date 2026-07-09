@@ -1,0 +1,69 @@
+<div class="public-page">
+  <div class="public-header">
+    <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <app-lang-switcher />
+      <a routerLink="/connexion" mat-button>Connexion</a>
+    </div>
+  </div>
+
+  <div class="public-content">
+    <div class="alert-banner">
+      <mat-icon>credit_card_off</mat-icon>
+      <div>
+        <strong>Service d'opposition 24h/24</strong>
+        <p>En cas d'urgence, appelez directement le <a href="tel:+243800000000">+243 800 000 000</a></p>
+      </div>
+    </div>
+
+    <div class="form-card fice-card">
+      @if (!submitted) {
+        <h2>Faire opposition à votre carte</h2>
+        <p class="text-secondary">Remplissez ce formulaire pour bloquer immédiatement votre carte.</p>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Numéro de carte (4 derniers chiffres)</mat-label>
+            <mat-icon matPrefix>credit_card</mat-icon>
+            <input matInput formControlName="numeroCarte" placeholder="XXXX" maxlength="4">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Motif</mat-label>
+            <mat-select formControlName="motif">
+              @for (m of motifs; track m) {
+                <mat-option [value]="m">{{ m }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Votre numéro de téléphone</mat-label>
+            <mat-icon matPrefix>phone</mat-icon>
+            <input matInput formControlName="telephone" placeholder="+243 …">
+          </mat-form-field>
+
+          <div class="confirm-check">
+            <input type="checkbox" formControlName="confirmation" id="confirmCheck">
+            <label for="confirmCheck">Je confirme vouloir bloquer ma carte immédiatement.</label>
+          </div>
+
+          @if (errorMessage) {
+            <p class="error-text">{{ errorMessage }}</p>
+          }
+          <button mat-raised-button color="warn" type="submit" [disabled]="form.invalid || loading" style="height:44px;border-radius:3px">
+            @if (loading) { Traitement… } @else { Faire opposition maintenant }
+          </button>
+        </form>
+      } @else {
+        <div class="success-state">
+          <mat-icon>check_circle</mat-icon>
+          <h2>Opposition enregistrée</h2>
+          <p>Votre demande d'opposition a été transmise. Votre carte est en cours de blocage. Un conseiller vous contactera sous 24h.</p>
+          <p><strong>Numéro de dossier :</strong> OPP-2026-{{ dossierId }}</p>
+          <a routerLink="/" mat-stroked-button color="primary">Retour à l'accueil</a>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="public-page">
+  <div class="public-header">
+    <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <app-lang-switcher />
+      <a routerLink="/" mat-button>← Accueil</a>
+    </div>
+  </div>
+
+  <div class="public-content">
+    <div class="page-header">
+      <h1>Aide &amp; FAQ</h1>
+      <p>Trouvez rapidement une réponse à votre question</p>
+    </div>
+
+    <!-- Contact rapide -->
+    <div class="contact-rapide">
+      <div class="contact-item">
+        <mat-icon>phone</mat-icon>
+        <div>
+          <strong>Assistance téléphonique</strong>
+          <a href="tel:+243800000000">+243 800 000 000</a>
+          <span>Lun–Ven 8h–17h</span>
+        </div>
+      </div>
+      <div class="contact-item contact-item--urgent">
+        <mat-icon>credit_card_off</mat-icon>
+        <div>
+          <strong>Opposition carte</strong>
+          <a routerLink="/opposition">Accéder au service →</a>
+          <span>24h/24 — 7j/7</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <mat-icon>calendar_month</mat-icon>
+        <div>
+          <strong>Prendre rendez-vous</strong>
+          <a routerLink="/rendez-vous">Réserver un créneau →</a>
+          <span>En agence</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="faq-title">Questions fréquentes</h2>
+    <mat-accordion class="faq-accordion">
+      @for (item of faq; track item.q) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ item.q }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ item.r }}</p>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+  </div>
+</div>

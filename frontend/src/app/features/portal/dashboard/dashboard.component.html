@@ -1,0 +1,94 @@
+<div class="page-header">
+  <h1>{{ 'dash.bonjour' | t }}, {{ user()?.prenom }} 👋</h1>
+  <p>{{ 'dash.subtitle' | t }}</p>
+</div>
+
+@if (loading) {
+  <div class="loading-state"><mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar></div>
+} @else {
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-card--primary">
+      <div class="kpi-card__icon"><span class="material-icons-round">savings</span></div>
+      <div class="kpi-card__body">
+        <p class="kpi-label">{{ 'dash.epargne.total' | t }}</p>
+        <p class="kpi-value">{{ totalEpargne | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+        <p class="kpi-sub">{{ comptes.length }} {{ 'dash.comptes.actifs' | t }}</p>
+      </div>
+    </div>
+
+    @if (creditEnCours) {
+      <div class="kpi-card kpi-card--warning">
+        <div class="kpi-card__icon"><span class="material-icons-round">credit_score</span></div>
+        <div class="kpi-card__body">
+          <p class="kpi-label">{{ 'dash.solde.restant' | t }}</p>
+          <p class="kpi-value">{{ creditEnCours.soldeRestant | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+          <p class="kpi-sub">{{ 'dash.echeance' | t }} {{ creditEnCours.prochaineEcheance | date:'dd MMM yyyy' }}</p>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-card__icon kpi-card__icon--neutral"><span class="material-icons-round">payments</span></div>
+        <div class="kpi-card__body">
+          <p class="kpi-label">{{ 'dash.mensualite' | t }}</p>
+          <p class="kpi-value">{{ creditEnCours.mensualite | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+          <p class="kpi-sub">{{ 'dash.taux' | t }} {{ creditEnCours.tauxInteret }}% / an</p>
+        </div>
+      </div>
+    }
+
+    <div class="kpi-card">
+      <div class="kpi-card__icon kpi-card__icon--accent"><span class="material-icons-round">groups</span></div>
+      <div class="kpi-card__body">
+        <p class="kpi-label">{{ 'dash.parts' | t }}</p>
+        <p class="kpi-value kpi-value--sm">Voir détails</p>
+        <a routerLink="/espace-membre/parts-sociales" class="kpi-link">{{ 'dash.consulter' | t }}</a>
+      </div>
+    </div>
+  </div>
+
+  @if (creditEnCours) {
+    <div class="fice-card credit-progress-card">
+      <div class="section-header">
+        <div>
+          <h3>{{ 'dash.remboursement' | t }}</h3>
+          <p class="text-secondary">{{ creditEnCours.referenceCredit }} — {{ creditEnCours.objet }}</p>
+        </div>
+        <a routerLink="/espace-membre/credits" mat-button color="primary">{{ 'dash.voir.tout' | t }}</a>
+      </div>
+      <div class="progress-info">
+        <span>{{ creditEnCours.montantAccorde - creditEnCours.soldeRestant | currency:'CDF':'FC ':'1.0-0':'fr' }} {{ 'dash.rembourses' | t }}</span>
+        <span>{{ progressCredit | number:'1.0-0' }}%</span>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="progressCredit" color="primary" class="credit-progress-bar"></mat-progress-bar>
+      <div class="progress-info">
+        <span class="text-secondary text-sm">sur {{ creditEnCours.montantAccorde | currency:'CDF':'FC ':'1.0-0':'fr' }} {{ 'dash.accordes' | t }}</span>
+        <span class="text-secondary text-sm">{{ creditEnCours.soldeRestant | currency:'CDF':'FC ':'1.0-0':'fr' }} {{ 'dash.restants' | t }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="fice-card transactions-card">
+    <div class="section-header">
+      <h3>{{ 'dash.derniers' | t }}</h3>
+      <a routerLink="/espace-membre/comptes" mat-button color="primary">{{ 'dash.voir.tout' | t }}</a>
+    </div>
+    <div class="transaction-list">
+      @for (tx of transactions; track tx.id) {
+        <div class="transaction-item">
+          <div class="tx-icon" [class.tx-icon--credit]="isCredit(tx.type)" [class.tx-icon--debit]="!isCredit(tx.type)">
+            <span class="material-icons-round">{{ getTransactionIcon(tx.type) }}</span>
+          </div>
+          <div class="tx-body">
+            <p class="tx-libelle">{{ tx.libelle }}</p>
+            <p class="tx-date text-secondary">{{ tx.dateOperation | date:'dd MMM yyyy' }}</p>
+          </div>
+          <div class="tx-amount" [class.montant-positif]="isCredit(tx.type)" [class.montant-negatif]="!isCredit(tx.type)">
+            {{ isCredit(tx.type) ? '+' : '-' }}{{ tx.montant | currency:'CDF':'FC ':'1.0-0':'fr' }}
+          </div>
+        </div>
+      } @empty {
+        <p class="text-secondary empty-state">{{ 'dash.aucune.op' | t }}</p>
+      }
+    </div>
+  </div>
+}

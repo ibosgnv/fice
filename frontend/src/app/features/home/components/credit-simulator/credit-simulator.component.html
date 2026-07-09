@@ -1,0 +1,74 @@
+<section class="simulator">
+  <div class="container">
+    <div class="sim-layout">
+      <div class="sim-left">
+        <p class="section-tag">{{ 'services.emprunter' | t }}</p>
+        <h2>{{ 'sim.titre' | t }}</h2>
+        <p class="sim-subtitle">{{ 'sim.subtitle' | t }}</p>
+
+        <div class="sim-field">
+          <div class="sim-field__header">
+            <label>{{ 'sim.montant' | t }}</label>
+            <span class="sim-field__value">{{ formatMontant(montant) }}</span>
+          </div>
+          <mat-slider [min]="montantMin" [max]="montantMax" [step]="montantStep" discrete>
+            <input matSliderThumb [(ngModel)]="montant">
+          </mat-slider>
+          <div class="sim-range-labels">
+            <span>{{ formatMontant(montantMin) }}</span>
+            <span>{{ formatMontant(montantMax) }}</span>
+          </div>
+        </div>
+
+        <div class="sim-field">
+          <div class="sim-field__header">
+            <label>{{ 'sim.duree' | t }}</label>
+            <span class="sim-field__value">{{ duree }} {{ 'sim.mois' | t }}</span>
+          </div>
+          <mat-slider [min]="dureeMin" [max]="dureeMax" [step]="6" discrete>
+            <input matSliderThumb [(ngModel)]="duree">
+          </mat-slider>
+          <div class="sim-range-labels">
+            <span>{{ dureeMin }} mois</span>
+            <span>{{ dureeMax }} mois</span>
+          </div>
+        </div>
+
+        <div class="sim-taux">
+          <mat-icon>info_outline</mat-icon>
+          {{ 'sim.taux' | t }} : <strong>{{ taux }}%</strong> / an
+        </div>
+      </div>
+
+      <div class="sim-right">
+        <div class="sim-result">
+          <div class="sim-result__main">
+            <p class="sim-result__label">{{ 'sim.mensualite' | t }}</p>
+            <p class="sim-result__value">{{ formatMontant(mensualite) }}</p>
+            <p class="sim-result__sub">{{ 'sim.mois' | t }}</p>
+          </div>
+
+          <div class="sim-breakdown">
+            <div class="sim-breakdown__row">
+              <span>Montant emprunté</span>
+              <strong>{{ formatMontant(montant) }}</strong>
+            </div>
+            <div class="sim-breakdown__row">
+              <span>Coût des intérêts</span>
+              <strong>{{ formatMontant(coutInterets) }}</strong>
+            </div>
+            <div class="sim-breakdown__row sim-breakdown__row--total">
+              <span>{{ 'sim.total' | t }}</span>
+              <strong>{{ formatMontant(coutTotal) }}</strong>
+            </div>
+          </div>
+
+          <a mat-raised-button color="primary" routerLink="/connexion" class="sim-cta">
+            {{ 'sim.cta' | t }}
+          </a>
+          <p class="sim-disclaimer">Simulation indicative. Taux définitif selon dossier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,91 @@
+<div class="page-header">
+  <h1>{{ 'credits.titre' | t }}</h1>
+  <p>{{ 'credits.subtitle' | t }}</p>
+</div>
+
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+} @else if (credits.length === 0) {
+  <div class="fice-card empty-card">
+    <span class="material-icons-round empty-icon">credit_score</span>
+    <h3>{{ 'credits.aucun' | t }}</h3>
+    <p class="text-secondary">{{ 'credits.aucun.desc' | t }}</p>
+  </div>
+} @else {
+  @for (credit of credits; track credit.id) {
+    <div class="credit-card fice-card">
+      <div class="credit-header">
+        <div class="credit-header__left">
+          <div class="credit-icon"><span class="material-icons-round">credit_score</span></div>
+          <div>
+            <h3>{{ credit.objet }}</h3>
+            <p class="text-secondary">{{ credit.referenceCredit }}</p>
+          </div>
+        </div>
+        <span class="badge"
+              [class.badge--success]="credit.statut === 'REMBOURSE' || credit.statut === 'SOLDE'"
+              [class.badge--warning]="credit.statut === 'EN_COURS'"
+              [class.badge--error]="credit.statut === 'EN_RETARD'">
+          {{ getStatutLabel(credit.statut) }}
+        </span>
+      </div>
+
+      <div class="credit-kpis">
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.montant' | t }}</p>
+          <p class="kpi-value">{{ credit.montantAccorde | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+        </div>
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.solde' | t }}</p>
+          <p class="kpi-value kpi-value--warning">{{ credit.soldeRestant | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+        </div>
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.mensualite' | t }}</p>
+          <p class="kpi-value">{{ credit.mensualite | currency:'CDF':'FC ':'1.0-0':'fr' }}</p>
+        </div>
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.taux' | t }}</p>
+          <p class="kpi-value">{{ credit.tauxInteret }}% / an</p>
+        </div>
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.duree' | t }}</p>
+          <p class="kpi-value">{{ credit.dureeEnMois }} {{ 'credits.mois' | t }}</p>
+        </div>
+        <div class="credit-kpi">
+          <p class="kpi-label">{{ 'credits.echeance' | t }}</p>
+          <p class="kpi-value">{{ credit.prochaineEcheance | date:'dd MMM yyyy' }}</p>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-labels">
+          <span>{{ 'credits.pct' | t }} {{ getProgress(credit) | number:'1.0-0' }}%</span>
+          <span class="text-secondary">{{ getMoisRestants(credit) }} {{ 'credits.restants' | t }}</span>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="getProgress(credit)" color="primary" class="credit-bar"></mat-progress-bar>
+        <div class="progress-dates">
+          <span class="text-secondary text-sm">{{ 'credits.debloc' | t }} {{ credit.dateDeblocage | date:'dd/MM/yyyy' }}</span>
+          <span class="text-secondary text-sm">{{ 'credits.fin' | t }} {{ credit.dateEcheanceFinal | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+
+      <div class="echeances-section">
+        <h4>{{ 'credits.prechances' | t }}</h4>
+        <div class="echeances-list">
+          @for (e of getEcheances(credit); track e.numero) {
+            <div class="echeance-item" [class.echeance-item--paid]="e.statut === 'PAYE'" [class.echeance-item--next]="e.statut === 'A_VENIR'">
+              <div class="echeance-dot" [class.echeance-dot--paid]="e.statut === 'PAYE'" [class.echeance-dot--next]="e.statut === 'A_VENIR'">
+                @if (e.statut === 'PAYE') { <span class="material-icons-round">check</span> }
+                @else { <span class="echeance-num">{{ e.numero }}</span> }
+              </div>
+              <div class="echeance-info">
+                <span class="echeance-date">{{ e.date | date:'MMM yyyy' }}</span>
+                <span class="echeance-montant">{{ e.montant | currency:'CDF':'FC ':'1.0-0':'fr' }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+}

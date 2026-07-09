@@ -1,0 +1,94 @@
+<div class="page-header">
+  <h1>{{ 'comptes.titre' | t }}</h1>
+  <p>{{ 'comptes.subtitle' | t }}</p>
+</div>
+
+@if (loading) {
+  <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+} @else {
+  <div class="comptes-layout">
+    <div class="comptes-list">
+      @for (compte of comptes; track compte.id) {
+        <div class="compte-card"
+             [class.compte-card--selected]="selectedCompte()?.id === compte.id"
+             (click)="selectCompte(compte)">
+          <div class="compte-card__header">
+            <div class="compte-icon">
+              <span class="material-icons-round">{{ compte.type === 'EPARGNE' ? 'savings' : 'account_balance_wallet' }}</span>
+            </div>
+            <div>
+              <p class="compte-type">{{ (compte.type === 'EPARGNE' ? 'comptes.epargne' : 'comptes.courant') | t }}</p>
+              <p class="compte-num">{{ compte.numeroCompte }}</p>
+            </div>
+          </div>
+          <div class="compte-solde">{{ compte.solde | currency:'CDF':'FC ':'1.0-0':'fr' }}</div>
+          <div class="compte-meta">
+            <span class="badge" [class.badge--success]="compte.statut === 'ACTIF'" [class.badge--error]="compte.statut !== 'ACTIF'">
+              {{ ('statut.' + compte.statut.toLowerCase()) | t }}
+            </span>
+            <span class="text-secondary text-sm">{{ compte.devise }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="transactions-panel fice-card">
+      @if (selectedCompte()) {
+        <div class="panel-header">
+          <div>
+            <h3>{{ 'comptes.histo' | t }}</h3>
+            <p class="text-secondary">{{ selectedCompte()?.numeroCompte }}</p>
+          </div>
+          <button mat-stroked-button color="primary">
+            <mat-icon>download</mat-icon>
+            {{ 'comptes.dl.releve' | t }}
+          </button>
+        </div>
+
+        @if (loadingTx) {
+          <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+        }
+
+        <table mat-table [dataSource]="transactions" class="transactions-table">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>{{ 'comptes.col.date' | t }}</th>
+            <td mat-cell *matCellDef="let tx">{{ tx.dateOperation | date:'dd/MM/yyyy' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="libelle">
+            <th mat-header-cell *matHeaderCellDef>{{ 'comptes.col.libelle' | t }}</th>
+            <td mat-cell *matCellDef="let tx">
+              <div class="tx-libelle-cell">
+                <span class="tx-type-badge" [class.tx-type-badge--in]="isCredit(tx.type)" [class.tx-type-badge--out]="!isCredit(tx.type)">
+                  {{ getTypeLabel(tx.type) }}
+                </span>
+                <span class="tx-desc">{{ tx.libelle }}</span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="reference">
+            <th mat-header-cell *matHeaderCellDef>{{ 'comptes.col.ref' | t }}</th>
+            <td mat-cell *matCellDef="let tx" class="text-secondary text-sm">{{ tx.reference }}</td>
+          </ng-container>
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef class="text-right">{{ 'comptes.col.montant' | t }}</th>
+            <td mat-cell *matCellDef="let tx" class="text-right">
+              <span [class.montant-positif]="isCredit(tx.type)" [class.montant-negatif]="!isCredit(tx.type)">
+                {{ isCredit(tx.type) ? '+' : '-' }}{{ tx.montant | currency:'CDF':'FC ':'1.0-0':'fr' }}
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="soldeApres">
+            <th mat-header-cell *matHeaderCellDef class="text-right">{{ 'comptes.col.solde' | t }}</th>
+            <td mat-cell *matCellDef="let tx" class="text-right fw-600">{{ tx.soldeApres | currency:'CDF':'FC ':'1.0-0':'fr' }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        @if (transactions.length === 0 && !loadingTx) {
+          <p class="empty-state text-secondary">{{ 'comptes.vide' | t }}</p>
+        }
+      }
+    </div>
+  </div>
+}

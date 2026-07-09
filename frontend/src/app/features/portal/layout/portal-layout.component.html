@@ -1,0 +1,72 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [opened]="sidenavOpen()" mode="side" class="sidenav">
+
+    <div class="sidenav-brand">
+      <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
+      <div class="brand-text">
+        <span class="brand-name">FICE</span>
+        <span class="brand-sub">{{ 'portal.titre' | t }}</span>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-avatar">{{ user()?.prenom?.charAt(0) }}{{ user()?.nom?.charAt(0) }}</div>
+      <div class="member-info">
+        <span class="member-name">{{ user()?.prenom }} {{ user()?.nom }}</span>
+        <span class="member-num">{{ user()?.numeroDeMembre }}</span>
+      </div>
+    </div>
+
+    <nav class="nav-list">
+      @for (item of navItems; track item.route) {
+        <a class="nav-item" [routerLink]="item.route" routerLinkActive="nav-item--active">
+          <span class="material-icons-round nav-item__icon">{{ item.icon }}</span>
+          <span class="nav-item__label">{{ item.labelKey | t }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidenav-footer">
+      <button class="nav-item nav-item--logout" (click)="auth.logout()">
+        <span class="material-icons-round nav-item__icon">logout</span>
+        <span class="nav-item__label">{{ 'portal.deconnexion' | t }}</span>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-spacer"></span>
+      <div class="toolbar-actions">
+        <app-lang-switcher />
+        <button mat-icon-button [matMenuTriggerFor]="notifMenu">
+          <mat-icon
+            [matBadge]="notifSvc.unreadCount() > 0 ? notifSvc.unreadCount() : null"
+            matBadgeColor="warn"
+            matBadgeSize="small">notifications_none</mat-icon>
+        </button>
+        <mat-menu #notifMenu="matMenu" class="notif-menu-panel">
+          <div (click)="$event.stopPropagation()">
+            <app-notifications-panel />
+          </div>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
+          <span class="avatar-sm">{{ user()?.prenom?.charAt(0) }}{{ user()?.nom?.charAt(0) }}</span>
+          <span>{{ user()?.prenom }}</span>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu">
+          <a mat-menu-item routerLink="/espace-membre/profil"><mat-icon>person_outline</mat-icon>{{ 'portal.profil' | t }}</a>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="auth.logout()"><mat-icon>logout</mat-icon>{{ 'portal.deconnexion' | t }}</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+
+    <div class="page-content"><router-outlet /></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

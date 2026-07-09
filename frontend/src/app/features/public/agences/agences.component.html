@@ -1,0 +1,35 @@
+<div class="public-page">
+  <div class="public-header">
+    <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+    <a routerLink="/" mat-button>← Accueil</a>
+  </div>
+
+  <div class="public-content">
+    <div class="page-header">
+      <h1>{{ 'contact.agence.titre' | t }}</h1>
+      <p>8 agences au service de nos membres en République Démocratique du Congo</p>
+    </div>
+
+    <div class="agences-grid">
+      @for (a of agences; track a.nom) {
+        <div class="agence-card fice-card">
+          <div class="agence-card__header">
+            <div class="agence-icon"><span class="material-icons-round">store</span></div>
+            <div>
+              <h3>{{ a.nom }}</h3>
+              <p class="ville-badge">{{ a.ville }}</p>
+            </div>
+          </div>
+          <div class="agence-info">
+            <p><mat-icon>location_on</mat-icon> {{ a.adresse }}</p>
+            <p><mat-icon>phone</mat-icon> <a [href]="telHref(a.telephone)">{{ a.telephone }}</a></p>
+            <p><mat-icon>schedule</mat-icon> {{ a.horaires }}</p>
+          </div>
+          <a mat-stroked-button color="primary" [href]="mapsUrl(a)" target="_blank" class="btn-itineraire">
+            <mat-icon>directions</mat-icon> Itinéraire
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>
