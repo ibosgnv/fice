@@ -60,9 +60,15 @@
           <mat-icon>expand_more</mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu">
-          <a mat-menu-item routerLink="/espace-membre/profil"><mat-icon>person_outline</mat-icon>{{ 'portal.profil' | t }}</a>
+          <a mat-menu-item routerLink="/espace-membre/profil">
+            <mat-icon>person_outline</mat-icon>
+            <span>{{ 'portal.profil' | t }}</span>
+          </a>
           <mat-divider></mat-divider>
-          <button mat-menu-item (click)="auth.logout()"><mat-icon>logout</mat-icon>{{ 'portal.deconnexion' | t }}</button>
+          <button mat-menu-item (click)="auth.logout()">
+            <mat-icon>logout</mat-icon>
+            <span>{{ 'portal.deconnexion' | t }}</span>
+          </button>
         </mat-menu>
       </div>
     </mat-toolbar>
