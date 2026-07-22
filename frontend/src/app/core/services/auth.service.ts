@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse } from '../models';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API = 'http://localhost:8080/api/auth';
+  private readonly API = `${environment.apiUrl}/auth`;
   private readonly TOKEN_KEY = 'fice_token';
   private readonly USER_KEY = 'fice_user';
 

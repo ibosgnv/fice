@@ -32,6 +32,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        if (membreRepository.count() > 0) {
+            return;
+        }
         Membre m1 = seedMembres();
         seedNotifications(m1);
     }

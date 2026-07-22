@@ -1,28 +1,25 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8000}
 
 spring:
   datasource:
-    url: jdbc:h2:mem:ficedb;DB_CLOSE_DELAY=-1
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://164.132.193.85:5432/ficedb}
+    username: ${SPRING_DATASOURCE_USERNAME:user_myself}
+    password: ${SPRING_DATASOURCE_PASSWORD:hello_th3r3_P}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
     show-sql: false
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 app:
   jwt:
-    secret: fice-cooperative-secret-key-must-be-at-least-256-bits-long-for-hs256
-    expiration-ms: 86400000  # 24h
+    secret: ${APP_JWT_SECRET:fice-cooperative-secret-key-must-be-at-least-256-bits-long-for-hs256}
+    expiration-ms: ${APP_JWT_EXPIRATION_MS:86400000}  # 24h
 
 logging:
   level:

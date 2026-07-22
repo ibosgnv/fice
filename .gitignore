@@ -49,3 +49,6 @@ backend/hs_err_pid*.log
 *.log
 logs/
 *.md
+backend/src/main/resources/application.yml
+backend/Dockerfile
+docker-compose.yml
