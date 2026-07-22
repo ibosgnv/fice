@@ -29,7 +29,7 @@
         </div>
         <div class="info-row">
           <span class="info-label">{{ 'parts.statut' | t }}</span>
-          <span class="badge badge--success">{{ ('statut.' + membre.statut.toLowerCase()) | t }}</span>
+          <span class="badge badge--success">{{ ('statut.' + (membre.statut?.toLowerCase() || 'inconnu')) | t }}</span>
         </div>
         <div class="info-row">
           <span class="info-label">{{ 'parts.valeur.part' | t }}</span>
@@ -50,7 +50,7 @@
       </div>
       <div class="parts-restantes">
         <span class="material-icons-round">info_outline</span>
-        <span>{{ objectifParts - membre.nombrePartsSociales }} {{ 'parts.restantes' | t }}</span>
+        <span>{{ partsRestantes }} {{ 'parts.restantes' | t }}</span>
       </div>
     </div>
   </div>

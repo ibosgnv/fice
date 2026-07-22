@@ -30,7 +30,11 @@ export class PartsSocialesComponent implements OnInit {
   }
 
   get progressObjectif(): number {
-    return ((this.membre?.nombrePartsSociales ?? 0) / this.objectifParts) * 100;
+    return Math.min(((this.membre?.nombrePartsSociales ?? 0) / this.objectifParts) * 100, 100);
+  }
+
+  get partsRestantes(): number {
+    return Math.max(this.objectifParts - (this.membre?.nombrePartsSociales ?? 0), 0);
   }
 
   ngOnInit() {

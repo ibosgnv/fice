@@ -10,7 +10,8 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CompteService } from '../../../core/services/compte.service';
 import { CreditService } from '../../../core/services/credit.service';
 import { Compte, Credit, Transaction } from '../../../core/models';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,9 +53,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const membreId = this.user()?.membreId!;
     forkJoin({
-      comptes: this.compteService.getComptes(membreId),
-      credits: this.creditService.getCredits(membreId),
-      transactions: this.compteService.getTransactions(membreId, 5)
+      comptes: this.compteService.getComptes(membreId).pipe(catchError(() => of([] as Compte[]))),
+      credits: this.creditService.getCredits(membreId).pipe(catchError(() => of([] as Credit[]))),
+      transactions: this.compteService.getTransactions(membreId, 5).pipe(catchError(() => of([] as Transaction[])))
     }).subscribe({
       next: ({ comptes, credits, transactions }) => {
         this.comptes = comptes;
