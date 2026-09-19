@@ -10,36 +10,17 @@
       </div>
     </div>
     <nav class="site-nav">
-
-  <a
-    routerLink="/"
-    class="site-nav__item">
-    Accueil
-  </a>
-
-  <a
-    routerLink="/particuliers"
-    class="site-nav__item site-nav__item--active">
-    {{ 'nav.particuliers' | t }}
-  </a>
-
-  <a href="#epargne" class="site-nav__item">
-    {{ 'nav.epargne' | t }}
-  </a>
-
-  <a href="#simulateur" class="site-nav__item">
-    {{ 'nav.credits' | t }}
-  </a>
-
-  <a href="#app" class="site-nav__item">
-    {{ 'nav.app' | t }}
-  </a>
-
-  <a href="#coopera" class="site-nav__item">
-    {{ 'nav.coopera' | t }}
-  </a>
-
-</nav>
+      <a
+        routerLink="/"
+          class="site-nav__item">
+         Accueil
+      </a>
+      <a href="#accueil" class="site-nav__item site-nav__item--active">{{ 'nav.particuliers' | t }}</a>
+      <a href="#epargne" class="site-nav__item">{{ 'nav.epargne' | t }}</a>
+      <a href="#simulateur" class="site-nav__item">{{ 'nav.credits' | t }}</a>
+      <a href="#app"     class="site-nav__item">{{ 'nav.app' | t }}</a>
+      <a href="#coopera" class="site-nav__item">{{ 'nav.coopera' | t }}</a>
+    </nav>
     <div class="header-actions">
       <a href="#contact" class="header-link"><mat-icon>location_on</mat-icon> {{ 'nav.agences' | t }}</a>
       <a href="#contact" class="header-link"><mat-icon>help_outline</mat-icon> {{ 'nav.aide' | t }}</a>
