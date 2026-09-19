@@ -1,0 +1,476 @@
+<div class="accueil-page">
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+  <header class="site-header">
+
+    <a routerLink="/" class="brand">
+      <div class="brand-symbol">
+        <span class="material-icons-round">account_balance</span>
+      </div>
+
+      <div class="brand-copy">
+        <strong>FICE</strong>
+        <span>Finance Inclusive pour une Croissance Émergente</span>
+      </div>
+    </a>
+
+    <nav class="main-nav">
+      <a routerLink="/" class="active">Accueil</a>
+
+      <a routerLink="/particuliers">
+        Particuliers
+      </a>
+
+      <a routerLink="/particuliers" fragment="epargne">
+        Épargne
+      </a>
+
+      <a routerLink="/particuliers" fragment="simulateur">
+        Crédits
+      </a>
+
+      <a href="#raison">
+        La coopérative
+      </a>
+
+      <a routerLink="/particuliers" fragment="news">
+        Actualités
+      </a>
+    </nav>
+
+    <div class="header-actions">
+
+      <button class="search-button" aria-label="Rechercher">
+        <mat-icon>search</mat-icon>
+      </button>
+
+      <app-lang-switcher />
+
+      <a routerLink="/connexion" class="member-button">
+        <mat-icon>person_outline</mat-icon>
+        <span>Espace membre</span>
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       HERO — NOUVEL ACCUEIL
+       ========================================================= -->
+  <section class="launch-hero">
+
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+
+        <p class="eyebrow">
+          <span></span>
+          ENSEMBLE POUR DEMAIN
+        </p>
+
+        <h1>
+          Le financement<br>
+          qui fait grandir<br>
+          <strong>vos ambitions</strong>
+        </h1>
+
+        <p class="hero-description">
+          FICE est une nouvelle coopérative financière pensée
+          pour accompagner les PME, les commerçants et les
+          entrepreneurs congolais avec des solutions simples,
+          accessibles et adaptées aux réalités du terrain.
+        </p>
+
+        <div class="hero-actions">
+
+          <a href="#raison" class="button button-orange">
+            Découvrir FICE
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+
+          <a href="#raison" class="button button-outline">
+            Notre vision
+          </a>
+
+        </div>
+
+        <div class="hero-benefits">
+
+          <div class="hero-benefit">
+            <mat-icon>groups</mat-icon>
+            <span>
+              Proche<br>
+              des entrepreneurs
+            </span>
+          </div>
+
+          <div class="hero-benefit">
+            <mat-icon>verified_user</mat-icon>
+            <span>
+              Des solutions<br>
+              accessibles
+            </span>
+          </div>
+
+          <div class="hero-benefit">
+            <mat-icon>trending_up</mat-icon>
+            <span>
+              Un impact durable<br>
+              sur nos communautés
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Message manuscrit -->
+      <div class="hero-slogan">
+        Entreprendre<br>
+        aujourd’hui,<br>
+        bâtir demain.
+        <span></span>
+      </div>
+
+
+      <!-- Proposition de valeur -->
+      <aside class="hero-value-panel">
+
+        <div class="value-panel-item">
+
+          <div class="value-panel-icon orange">
+            <mat-icon>payments</mat-icon>
+          </div>
+
+          <div>
+            <strong>Financement adapté</strong>
+            <p>
+              Des solutions conçues selon les réalités
+              des entrepreneurs.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="value-panel-item">
+
+          <div class="value-panel-icon">
+            <mat-icon>diversity_3</mat-icon>
+          </div>
+
+          <div>
+            <strong>Accompagnement de proximité</strong>
+            <p>
+              Une relation humaine pour faire grandir
+              vos projets.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="value-panel-item">
+
+          <div class="value-panel-icon orange">
+            <mat-icon>lightbulb</mat-icon>
+          </div>
+
+          <div>
+            <strong>Expertise locale</strong>
+            <p>
+              Une connaissance du Congo enrichie par
+              l’expérience de la diaspora.
+            </p>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       NOTRE RAISON D'ÊTRE
+       ========================================================= -->
+  <section class="reason-section" id="raison">
+
+    <div class="reason-main">
+
+      <div class="reason-copy">
+
+        <p class="section-kicker">
+          <span></span>
+          NOTRE RAISON D’ÊTRE
+        </p>
+
+        <h2>
+          Une finance pensée<br>
+          par ceux qui connaissent<br>
+          <strong>le terrain.</strong>
+        </h2>
+
+        <p class="reason-introduction">
+          FICE est née d’une ambition : rapprocher les solutions
+          financières des entrepreneurs qui font vivre l’économie
+          congolaise. Pensée par des Congolais de la diaspora,
+          la coopérative associe une expérience internationale
+          à une compréhension concrète des réalités locales.
+        </p>
+
+        <a href="#axes" class="vision-button">
+          En savoir plus sur notre vision
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+
+      </div>
+
+
+      <!-- Partie visuelle Congo -->
+      <div class="reason-visual">
+
+        <p class="diaspora-note">
+          Des Congolais<br>
+          d’ici et d’ailleurs,<br>
+          pour un même avenir
+        </p>
+
+        <div class="congo-photo">
+          <span>Un Congo entreprenant</span>
+        </div>
+
+        <div class="polaroid polaroid-one">
+          <div class="polaroid-image entrepreneur-image"></div>
+          <p>Soutenir les initiatives locales</p>
+        </div>
+
+        <div class="polaroid polaroid-two">
+          <div class="polaroid-image commercante-image"></div>
+          <p>Faire grandir les talents congolais</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Nos 3 valeurs -->
+    <div class="reason-values">
+
+      <article class="reason-card reason-card-green">
+
+        <div class="reason-card-icon">
+          <mat-icon>groups</mat-icon>
+        </div>
+
+        <div>
+          <h3>Proche du terrain</h3>
+
+          <p>
+            Des solutions pensées à partir des besoins réels
+            des entrepreneurs congolais.
+          </p>
+        </div>
+
+      </article>
+
+
+      <article class="reason-card reason-card-orange">
+
+        <div class="reason-card-icon">
+          <mat-icon>public</mat-icon>
+        </div>
+
+        <div>
+          <h3>
+            Une initiative portée<br>
+            par la diaspora congolaise
+          </h3>
+
+          <p>
+            Une vision ouverte sur le monde, construite avec
+            une connaissance approfondie du contexte local.
+          </p>
+        </div>
+
+      </article>
+
+
+      <article class="reason-card reason-card-green">
+
+        <div class="reason-card-icon">
+          <mat-icon>eco</mat-icon>
+        </div>
+
+        <div>
+          <h3>
+            Une ambition<br>
+            d’inclusion financière
+          </h3>
+
+          <p>
+            Faciliter l’accès à des services financiers
+            pour soutenir une économie plus dynamique
+            et plus équitable.
+          </p>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       NOS AXES D'ACTION
+       ========================================================= -->
+  <section class="axes-section" id="axes">
+
+    <div class="axes-heading">
+
+      <p class="section-kicker">
+        <span></span>
+        NOS AXES D’ACTION
+      </p>
+
+      <h2>
+        Des solutions concrètes pour<br>
+        les entrepreneurs d’aujourd’hui et de demain.
+      </h2>
+
+    </div>
+
+
+    <div class="axes-grid">
+
+      <article class="axis-item">
+
+        <div class="axis-icon orange">
+          <mat-icon>storefront</mat-icon>
+        </div>
+
+        <h3>PME & commerçants</h3>
+
+        <p>
+          Un soutien adapté à vos projets
+          et à votre réalité de terrain.
+        </p>
+
+      </article>
+
+
+      <article class="axis-item">
+
+        <div class="axis-icon orange">
+          <mat-icon>monetization_on</mat-icon>
+        </div>
+
+        <h3>Micro-crédit</h3>
+
+        <p>
+          Des financements souples pour développer
+          et dynamiser vos activités.
+        </p>
+
+      </article>
+
+
+      <article class="axis-item">
+
+        <div class="axis-icon green">
+          <mat-icon>savings</mat-icon>
+        </div>
+
+        <h3>Épargne & services financiers</h3>
+
+        <p>
+          Des solutions pour préparer et sécuriser
+          l’avenir de vos projets et de vos familles.
+        </p>
+
+      </article>
+
+
+      <article class="axis-item">
+
+        <div class="axis-icon green">
+          <mat-icon>support_agent</mat-icon>
+        </div>
+
+        <h3>Accompagnement entrepreneurial</h3>
+
+        <p>
+          Des conseils et un suivi pour renforcer
+          vos capacités et saisir de nouvelles opportunités.
+        </p>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       CTA DE LANCEMENT
+       ========================================================= -->
+  <section class="launch-cta">
+
+    <div class="launch-cta-copy">
+
+      <p class="cta-kicker">
+        <span></span>
+        REJOIGNEZ L’AVENTURE
+      </p>
+
+      <h2>
+        Une nouvelle coopérative financière se prépare.<br>
+        <strong>Faites partie du changement.</strong>
+      </h2>
+
+      <div class="cta-values">
+
+        <div>
+          <mat-icon>handshake</mat-icon>
+          <span>Ensemble<br>pour entreprendre</span>
+        </div>
+
+        <div>
+          <mat-icon>groups</mat-icon>
+          <span>Pour des communautés<br>plus fortes</span>
+        </div>
+
+        <div>
+          <mat-icon>eco</mat-icon>
+          <span>Pour un Congo<br>plus prospère</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="launch-cta-action">
+
+      <a routerLink="/adhesion">
+        Découvrir le projet FICE
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+
+      <p>
+        « Financer les talents d’aujourd’hui,<br>
+        pour construire le Congo de demain. »
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
