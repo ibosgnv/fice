@@ -26,7 +26,7 @@ public class AuthService {
     public LoginResponse login(LoginRequest request) {
         if (AGENT_EMAIL.equals(request.getEmail()) && AGENT_PASSWORD.equals(request.getMotDePasse())) {
             String token = jwtUtil.generateToken(AGENT_EMAIL, "AGENT");
-            return new LoginResponse(token, "AGENT", "Kouassi", "Jean-Pierre", "AGT-001", 0L);
+            return new LoginResponse(token, "AGENT", "Kalonji", "Mbala", "AGT-001", 0L);
         }
 
         Membre membre = membreRepository.findByEmail(request.getEmail())

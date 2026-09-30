@@ -1,5 +1,6 @@
 package com.ibos.fice.notification;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibos.fice.membre.Membre;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,6 +25,7 @@ public class Notification {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "membre_id")
+    @JsonIgnore
     private Membre membre;
 
     public enum TypeNotif { ECHEANCE, VIREMENT, INFO, ALERTE }

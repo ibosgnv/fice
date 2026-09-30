@@ -1,5 +1,6 @@
 package com.ibos.fice.membre;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Membre {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String motDePasse;
 
     private String telephone;

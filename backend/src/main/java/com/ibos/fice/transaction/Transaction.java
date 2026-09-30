@@ -1,5 +1,6 @@
 package com.ibos.fice.transaction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibos.fice.compte.Compte;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,6 +32,7 @@ public class Transaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "compte_id", nullable = false)
+    @JsonIgnore
     private Compte compte;
 
     public enum TypeTransaction {

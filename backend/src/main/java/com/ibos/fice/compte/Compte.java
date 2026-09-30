@@ -1,5 +1,6 @@
 package com.ibos.fice.compte;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibos.fice.membre.Membre;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,7 @@ public class Compte {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "membre_id", nullable = false)
+    @JsonIgnore
     private Membre membre;
 
     public enum TypeCompte {

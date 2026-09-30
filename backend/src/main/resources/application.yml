@@ -20,7 +20,13 @@ app:
   jwt:
     secret: ${APP_JWT_SECRET:fice-cooperative-secret-key-must-be-at-least-256-bits-long-for-hs256}
     expiration-ms: ${APP_JWT_EXPIRATION_MS:86400000}  # 24h
+  cors:
+    # Comma-separated list of origin patterns. Wildcards allowed (e.g. https://*.netlify.app).
+    # Override via APP_CORS_ALLOWED_ORIGIN_PATTERNS env var in prod.
+    allowed-origin-patterns: ${APP_CORS_ALLOWED_ORIGIN_PATTERNS:http://localhost:4200,https://*.netlify.app}
 
 logging:
   level:
     com.ibos.fice: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.cors: TRACE

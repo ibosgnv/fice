@@ -1,5 +1,6 @@
 package com.ibos.fice.credit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibos.fice.membre.Membre;
 import jakarta.persistence.*;
 import lombok.*;
@@ -41,6 +42,7 @@ public class Credit {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "membre_id", nullable = false)
+    @JsonIgnore
     private Membre membre;
 
     public enum StatutCredit {
