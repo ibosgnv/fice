@@ -52,3 +52,7 @@ logs/
 backend/src/main/resources/application.yml
 backend/Dockerfile
 docker-compose.yml
+
+backend.zip
+backend/.dockerignore
+documents/
