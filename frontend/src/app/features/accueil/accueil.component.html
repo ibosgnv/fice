@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <nav class="site-nav">
+    <nav class="site-nav" [class.site-nav--open]="menuOpen()" (click)="menuOpen.set(false)">
 
       <a
         routerLink="/"
@@ -79,6 +79,15 @@
         <span>Espace Membre</span>
       </a>
 
+      <button
+        type="button"
+        class="menu-toggle"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Menu"
+        (click)="menuOpen.set(!menuOpen())">
+        <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+      </button>
+
     </div>
 
   </header>
@@ -114,12 +123,12 @@
 
         <div class="hero-buttons">
 
-          <a href="#raison" class="btn-primary">
+          <a routerLink="/" fragment="raison" class="btn-primary">
             Découvrir FICE
             <mat-icon>arrow_forward</mat-icon>
           </a>
 
-          <a href="#raison" class="btn-secondary">
+          <a routerLink="/" fragment="raison" class="btn-secondary">
             Notre vision
           </a>
 
@@ -245,8 +254,6 @@
        ===================================================== -->
   <section class="reason-section" id="raison">
 
-   <section class="reason-section" id="raison">
-
   <div class="reason-container">
 
     <!-- TEXTE GAUCHE -->
@@ -275,7 +282,7 @@
         concrète des réalités locales.
       </p>
 
-      <a href="#axes" class="vision-button">
+      <a routerLink="/" fragment="axes" class="vision-button">
         En savoir plus sur notre vision
         <mat-icon>arrow_forward</mat-icon>
       </a>

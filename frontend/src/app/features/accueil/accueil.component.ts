@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -15,4 +15,6 @@ import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lan
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss'
 })
-export class AccueilComponent {}
+export class AccueilComponent {
+  menuOpen = signal(false);
+}

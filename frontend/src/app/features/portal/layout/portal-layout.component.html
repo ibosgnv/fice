@@ -1,5 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav [opened]="sidenavOpen()" mode="side" class="sidenav">
+  <mat-sidenav
+    class="sidenav"
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="sidenavOpen()"
+    (openedChange)="sidenavOpen.set($event)">
 
     <div class="sidenav-brand">
       <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
@@ -19,7 +23,7 @@
 
     <nav class="nav-list">
       @for (item of navItems; track item.route) {
-        <a class="nav-item" [routerLink]="item.route" routerLinkActive="nav-item--active">
+        <a class="nav-item" [routerLink]="item.route" routerLinkActive="nav-item--active" (click)="closeOnMobile()">
           <span class="material-icons-round nav-item__icon">{{ item.icon }}</span>
           <span class="nav-item__label">{{ item.labelKey | t }}</span>
         </a>
@@ -56,7 +60,7 @@
 
         <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
           <span class="avatar-sm">{{ user()?.prenom?.charAt(0) }}{{ user()?.nom?.charAt(0) }}</span>
-          <span>{{ user()?.prenom }}</span>
+          <span class="profile-name">{{ user()?.prenom }}</span>
           <mat-icon>expand_more</mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu">

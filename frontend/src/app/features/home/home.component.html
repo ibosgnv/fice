@@ -9,25 +9,33 @@
         <span class="brand-tagline">Coopérative d'Épargne</span>
       </div>
     </div>
-    <nav class="site-nav">
+    <nav class="site-nav" [class.site-nav--open]="menuOpen()" (click)="menuOpen.set(false)">
       <a
         routerLink="/"
           class="site-nav__item">
          Accueil
       </a>
-      <a href="#accueil" class="site-nav__item site-nav__item--active">{{ 'nav.particuliers' | t }}</a>
-      <a href="#epargne" class="site-nav__item">{{ 'nav.epargne' | t }}</a>
-      <a href="#simulateur" class="site-nav__item">{{ 'nav.credits' | t }}</a>
-      <a href="#app"     class="site-nav__item">{{ 'nav.app' | t }}</a>
-      <a href="#coopera" class="site-nav__item">{{ 'nav.coopera' | t }}</a>
+      <a routerLink="/particuliers" fragment="accueil" class="site-nav__item site-nav__item--active">{{ 'nav.particuliers' | t }}</a>
+      <a routerLink="/particuliers" fragment="epargne" class="site-nav__item">{{ 'nav.epargne' | t }}</a>
+      <a routerLink="/particuliers" fragment="simulateur" class="site-nav__item">{{ 'nav.credits' | t }}</a>
+      <a routerLink="/particuliers" fragment="app" class="site-nav__item">{{ 'nav.app' | t }}</a>
+      <a routerLink="/particuliers" fragment="coopera" class="site-nav__item">{{ 'nav.coopera' | t }}</a>
     </nav>
     <div class="header-actions">
-      <a href="#contact" class="header-link"><mat-icon>location_on</mat-icon> {{ 'nav.agences' | t }}</a>
-      <a href="#contact" class="header-link"><mat-icon>help_outline</mat-icon> {{ 'nav.aide' | t }}</a>
+      <a routerLink="/agences" class="header-link"><mat-icon>location_on</mat-icon> <span>{{ 'nav.agences' | t }}</span></a>
+      <a routerLink="/aide" class="header-link"><mat-icon>help_outline</mat-icon> <span>{{ 'nav.aide' | t }}</span></a>
       <app-lang-switcher />
       <a mat-raised-button color="primary" routerLink="/connexion" class="btn-login-header">
-        <mat-icon>login</mat-icon> {{ 'nav.espace' | t }}
+        <mat-icon>login</mat-icon> <span class="btn-login-label">{{ 'nav.espace' | t }}</span>
       </a>
+      <button
+        type="button"
+        class="menu-toggle"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Menu"
+        (click)="menuOpen.set(!menuOpen())">
+        <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+      </button>
     </div>
   </header>
 
@@ -48,7 +56,7 @@
       <p class="hero-banner__sub">{{ 'hero.sub' | t }}</p>
       <div class="hero-banner__actions">
         <a mat-raised-button routerLink="/connexion" class="hero-btn-cta">{{ 'hero.cta' | t }}</a>
-        <a mat-button href="#" class="hero-btn-secondary">{{ 'hero.membre' | t }}</a>
+        <a mat-button routerLink="/adhesion" class="hero-btn-secondary">{{ 'hero.membre' | t }}</a>
       </div>
     </div>
     <div class="hero-banner__visual" aria-hidden="true">
@@ -78,8 +86,8 @@
     <div class="container">
       <div class="services-grid">
         @for (s of services; track s.key) {
-          <a [href]="s.route.startsWith('#') ? s.route : null"
-             [routerLink]="s.route.startsWith('/') ? s.route : null"
+          <a [routerLink]="s.route.startsWith('#') ? [] : s.route"
+             [fragment]="s.route.startsWith('#') ? s.route.slice(1) : undefined"
              class="service-tile">
             <div class="service-tile__icon"><mat-icon>{{ s.icon }}</mat-icon></div>
             <span class="service-tile__label">{{ s.key | t }}</span>
@@ -102,8 +110,8 @@
             <div class="promo-card__body">
               <h3>{{ p.titreKey | t }}</h3>
               <p>{{ p.descKey | t }}</p>
-              <a [href]="p.route.startsWith('#') ? p.route : null"
-                 [routerLink]="p.route.startsWith('/') ? p.route : null"
+              <a [routerLink]="p.route.startsWith('#') ? [] : p.route"
+                 [fragment]="p.route.startsWith('#') ? p.route.slice(1) : undefined"
                  class="promo-card__cta">
                 {{ p.ctaKey | t }} <mat-icon>chevron_right</mat-icon>
               </a>
@@ -150,7 +158,7 @@
       <h2 class="section-title">{{ 'seg.title' | t }}</h2>
       <div class="segments-grid">
         @for (seg of segments; track seg.titreKey) {
-          <a href="#" class="segment-card">
+          <a routerLink="/particuliers" fragment="simulateur" class="segment-card">
             <div class="segment-card__icon"><mat-icon>{{ seg.icon }}</mat-icon></div>
             <div class="segment-card__body">
               <h3>{{ seg.titreKey | t }}</h3>
@@ -193,7 +201,7 @@
     <div class="container">
       <div class="news-header">
         <h2 class="section-title">{{ 'news.titre' | t }}</h2>
-        <a href="#" class="news-voir-tout">{{ 'news.voir' | t }}</a>
+        <a routerLink="/particuliers" fragment="news" class="news-voir-tout">{{ 'news.voir' | t }}</a>
       </div>
       <div class="news-grid">
         @for (article of news; track article.titreKey) {
@@ -205,7 +213,7 @@
               <span class="news-card__cat">{{ article.catKey | t }}</span>
               <h3>{{ article.titreKey | t }}</h3>
               <p>{{ article.descKey | t }}</p>
-              <a href="#" class="news-card__lien">{{ 'news.lire' | t }}</a>
+              <a routerLink="/particuliers" fragment="news" class="news-card__lien">{{ 'news.lire' | t }}</a>
             </div>
           </article>
         }
@@ -220,7 +228,7 @@
         <p class="section-tag">{{ 'nav.coopera' | t }}</p>
         <h2>{{ 'impact.titre' | t }}</h2>
         <p>{{ 'impact.subtitle' | t }}</p>
-        <a href="#" class="impact-cta">{{ 'impact.cta' | t }}</a>
+        <a routerLink="/" fragment="raison" class="impact-cta">{{ 'impact.cta' | t }}</a>
       </div>
       <div class="impact-stats">
         @for (stat of impactStats; track stat.valKey) {
@@ -242,11 +250,11 @@
         <h2>{{ 'app.title' | t }}</h2>
         <p>{{ 'app.desc' | t }}</p>
         <div class="app-badges">
-          <a href="#" class="app-badge">
+          <a routerLink="/particuliers" fragment="app" class="app-badge">
             <mat-icon>phone_android</mat-icon>
             <div><span>{{ 'app.dispo' | t }}</span><strong>{{ 'app.google' | t }}</strong></div>
           </a>
-          <a href="#" class="app-badge">
+          <a routerLink="/particuliers" fragment="app" class="app-badge">
             <mat-icon>phone_iphone</mat-icon>
             <div><span>{{ 'app.dispo' | t }}</span><strong>{{ 'app.apple' | t }}</strong></div>
           </a>
@@ -277,7 +285,7 @@
         <div>
           <h3>{{ 'contact.agence.titre' | t }}</h3>
           <p>{{ 'contact.agence.desc' | t }}</p>
-          <a href="#">{{ 'contact.agence.lien' | t }}</a>
+          <a routerLink="/agences">{{ 'contact.agence.lien' | t }}</a>
         </div>
       </div>
       <div class="contact-card">
@@ -293,7 +301,7 @@
         <div>
           <h3>{{ 'contact.rdv.titre' | t }}</h3>
           <p>{{ 'contact.rdv.desc' | t }}</p>
-          <a href="#">{{ 'contact.rdv.lien' | t }}</a>
+          <a routerLink="/rendez-vous">{{ 'contact.rdv.lien' | t }}</a>
         </div>
       </div>
     </div>
@@ -312,29 +320,29 @@
       <div class="footer-links">
         <div class="footer-col">
           <p class="footer-col-title">{{ 'footer.produits' | t }}</p>
-          <a href="#">{{ 'services.ouvrir' | t }}</a>
-          <a href="#">{{ 'services.epargner' | t }}</a>
-          <a href="#">{{ 'services.emprunter' | t }}</a>
-          <a href="#">{{ 'services.parts' | t }}</a>
+          <a routerLink="/adhesion">{{ 'services.ouvrir' | t }}</a>
+          <a routerLink="/particuliers" fragment="epargne">{{ 'services.epargner' | t }}</a>
+          <a routerLink="/particuliers" fragment="simulateur">{{ 'services.emprunter' | t }}</a>
+          <a routerLink="/adhesion">{{ 'services.parts' | t }}</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">{{ 'footer.coopera' | t }}</p>
-          <a href="#">Qui sommes-nous</a>
-          <a href="#">Gouvernance</a>
-          <a href="#contact">Agences</a>
-          <a href="#">Actualités</a>
+          <a routerLink="/" fragment="raison">Qui sommes-nous</a>
+          <a routerLink="/" fragment="raison">Gouvernance</a>
+          <a routerLink="/agences">Agences</a>
+          <a routerLink="/particuliers" fragment="news">Actualités</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">{{ 'footer.support' | t }}</p>
-          <a href="#">{{ 'services.aide' | t }}</a>
-          <a href="#">{{ 'contact.rdv.titre' | t }}</a>
-          <a href="#">Faire opposition</a>
+          <a routerLink="/aide">{{ 'services.aide' | t }}</a>
+          <a routerLink="/rendez-vous">{{ 'contact.rdv.titre' | t }}</a>
+          <a routerLink="/opposition">Faire opposition</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">{{ 'footer.legal' | t }}</p>
-          <a href="#">Mentions légales</a>
-          <a href="#">Protection des données</a>
-          <a href="#">CGU</a>
+          <a routerLink="/legal/mentions">Mentions légales</a>
+          <a routerLink="/legal/rgpd">Protection des données</a>
+          <a routerLink="/legal/cgu">CGU</a>
         </div>
       </div>
     </div>

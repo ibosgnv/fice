@@ -1,5 +1,5 @@
 import { ApplicationConfig, ErrorHandler, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -24,7 +24,12 @@ class ChunkLoadReloadHandler implements ErrorHandler {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      // Remonte en haut à chaque navigation et défile vers #fragment (ex. /particuliers#epargne)
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
+    ),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([jwtInterceptor])),
     { provide: LOCALE_ID, useValue: 'fr' },

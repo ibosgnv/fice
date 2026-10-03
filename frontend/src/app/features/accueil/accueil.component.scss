@@ -211,6 +211,25 @@
 }
 
 
+.menu-toggle {
+  width: 40px;
+  height: 40px;
+
+  display: none;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #0f172a;
+
+  cursor: pointer;
+}
+
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -1223,6 +1242,235 @@ p:not(.section-label) {
       0 12px 18px
       rgba(0, 0, 0, 0.18)
     );
+}
+
+
+/* ============================================================
+   RESPONSIVE — HEADER, HERO, RAISON, AXES
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .site-header {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-nav--open {
+    position: absolute;
+
+    top: 68px;
+    left: 0;
+    right: 0;
+
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px 0;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #edf0f2;
+
+    box-shadow: 0 12px 24px rgba(15, 23, 42, .08);
+  }
+
+  .site-nav--open .site-nav__item {
+    padding: 14px 20px;
+
+    border-bottom: none;
+    border-left: 3px solid transparent;
+  }
+
+  .site-nav--open .site-nav__item--active {
+    border-left-color: var(--orange);
+  }
+
+  .header-actions {
+    margin-left: auto;
+    gap: 10px;
+  }
+
+  .header-link span {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  /* Hero : empilement texte / photo / panneau */
+  .hero-grid {
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-content {
+    padding: 40px 20px 36px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.2rem, 9vw, 2.8rem);
+    letter-spacing: -1.2px;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+  }
+
+  .hero-benefits {
+    margin-top: 32px;
+
+    flex-wrap: wrap;
+    gap: 16px 22px;
+  }
+
+  .hero-media {
+    min-height: 300px;
+  }
+
+  .hero-media img {
+    left: 0;
+    width: 100%;
+
+    object-position: 80% center;
+  }
+
+  .hero-media-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 89, 69, .85) 0%,
+        rgba(0, 89, 69, .15) 35%,
+        rgba(0, 0, 0, 0) 60%
+      );
+  }
+
+  .hero-handwriting {
+    left: 20px;
+    top: 24px;
+
+    font-size: 1rem;
+  }
+
+  .hero-panel {
+    position: relative;
+
+    top: auto;
+    right: auto;
+
+    width: auto;
+
+    margin: -48px 20px 64px;
+  }
+
+  .hero-panel h3 {
+    font-size: .88rem;
+  }
+
+  .hero-panel p {
+    font-size: .76rem;
+  }
+
+  /* Raison d'être */
+  .reason-section,
+  .axes-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .reason-container {
+    grid-template-columns: 1fr;
+  }
+
+  .reason-content {
+    padding-right: 0;
+  }
+
+  .reason-content h2 {
+    letter-spacing: -1px;
+  }
+
+  .reason-visual {
+    min-height: 0;
+  }
+
+  .reason-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  /* Axes d'action */
+  .axes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 28px;
+  }
+
+  .axis-card,
+  .axis-card:first-child,
+  .axis-card:last-child {
+    min-height: 0;
+
+    padding: 0 12px;
+  }
+
+  .axis-card:nth-child(2n) {
+    border-right: none;
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .brand-tagline {
+    display: none;
+  }
+
+  .member-button {
+    padding: 0 12px;
+  }
+
+  .member-button span {
+    display: none;
+  }
+
+  .pillar-card {
+    padding: 18px;
+
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+  }
+
+  .pillar-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .axes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .axis-card {
+    border-right: none;
+  }
+
+  .final-section {
+    padding: 0 16px 32px;
+  }
+
 }
 
 

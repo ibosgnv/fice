@@ -91,3 +91,14 @@
 .profile-btn { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--color-text-primary); }
 .avatar-sm { width: 30px; height: 30px; background: #0F172A; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.72rem; }
 .page-content { flex: 1; padding: 28px 32px; overflow-y: auto; }
+
+// ─── Mobile ───────────────────────────────────────────────────────────────────
+@media (max-width: 900px) {
+  .toolbar { padding: 0 8px; height: 56px; gap: 4px; }
+  .page-content { padding: 20px 16px; }
+}
+
+@media (max-width: 480px) {
+  .profile-name { display: none; }
+  .profile-btn { min-width: 0; padding: 0 6px; }
+}

@@ -7,8 +7,8 @@
     </div>
     <div class="login-header__right">
       <nav class="login-header__nav">
-        <a href="#">{{ 'nav.agences' | t }}</a>
-        <a href="#">{{ 'nav.aide' | t }}</a>
+        <a routerLink="/agences">{{ 'nav.agences' | t }}</a>
+        <a routerLink="/aide">{{ 'nav.aide' | t }}</a>
       </nav>
       <app-lang-switcher />
     </div>
@@ -47,7 +47,7 @@
         </mat-form-field>
 
         <div class="forgot-link">
-          <a href="#">{{ 'login.mdp.oublie' | t }}</a>
+          <a routerLink="/mot-de-passe-oublie">{{ 'login.mdp.oublie' | t }}</a>
         </div>
 
         <button mat-raised-button color="primary" type="submit"
@@ -87,16 +87,16 @@
         <mat-icon class="aside-icon">credit_card_off</mat-icon>
         <div>
           <p class="aside-title">{{ 'login.aside.opp.titre' | t }}</p>
-          <a href="#" class="aside-link">{{ 'login.aside.opp.lien' | t }}</a>
+          <a routerLink="/opposition" class="aside-link">{{ 'login.aside.opp.lien' | t }}</a>
         </div>
       </div>
     </div>
   </main>
 
   <footer class="login-footer">
-    <a href="#">{{ 'login.footer.legal' | t }}</a>
-    <a href="#">{{ 'login.footer.data' | t }}</a>
-    <a href="#">{{ 'login.footer.access' | t }}</a>
+    <a routerLink="/legal/mentions">{{ 'login.footer.legal' | t }}</a>
+    <a routerLink="/legal/rgpd">{{ 'login.footer.data' | t }}</a>
+    <a routerLink="/aide">{{ 'login.footer.access' | t }}</a>
     <span>{{ 'login.copy' | t }}</span>
   </footer>
 

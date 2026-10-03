@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,7 @@ import { LangSwitcherComponent } from '../../../shared/components/lang-switcher/
     CommonModule, ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatButtonModule,
     MatIconModule, MatProgressSpinnerModule, MatSnackBarModule,
-    TranslatePipe, LangSwitcherComponent
+    RouterLink, TranslatePipe, LangSwitcherComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

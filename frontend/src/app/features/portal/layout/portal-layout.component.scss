@@ -231,3 +231,14 @@
   padding: 28px 32px;
   overflow-y: auto;
 }
+
+// ─── Mobile ───────────────────────────────────────────────────────────────────
+@media (max-width: 900px) {
+  .toolbar { padding: 0 8px; height: 56px; }
+  .page-content { padding: 20px 16px; }
+}
+
+@media (max-width: 480px) {
+  .profile-name { display: none; }
+  .profile-btn { min-width: 0; padding: 0 6px; }
+}

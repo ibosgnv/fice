@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   isLoggedIn = this.auth.isAuthenticated();
   currentUser = this.auth.currentUser;
+  menuOpen = signal(false);
 
   private intersectionObserver?: IntersectionObserver;
   private revealObserver?: IntersectionObserver;

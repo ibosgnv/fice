@@ -174,3 +174,9 @@
   font-weight: 600;
   color: var(--color-text-primary);
 }
+
+@media (max-width: 600px) {
+  .credit-header { flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .credit-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; padding: 16px; }
+  .echeance-item { flex: 1 1 calc(50% - 4px); min-width: 0; }
+}

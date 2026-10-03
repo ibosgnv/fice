@@ -192,3 +192,9 @@
   text-align: center;
   padding: 24px;
 }
+
+@media (max-width: 600px) {
+  .kpi-grid { grid-template-columns: 1fr; gap: 12px; }
+  .progress-info { flex-wrap: wrap; gap: 4px 12px; }
+  .section-header { gap: 8px; }
+}

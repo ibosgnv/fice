@@ -14,6 +14,7 @@
 
   @if (loading) { <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar> }
 
+  <div class="table-scroll">
   <table mat-table [dataSource]="filtered" class="membres-table">
     <ng-container matColumnDef="membre">
       <th mat-header-cell *matHeaderCellDef>{{ 'bo.col.membre' | t }}</th>
@@ -72,6 +73,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="membre-row"></tr>
   </table>
+  </div>
 
   @if (filtered.length === 0 && !loading) {
     <p class="empty-state text-secondary">{{ 'bo.vide' | t }} "{{ searchQuery }}"</p>
