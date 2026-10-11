@@ -4,7 +4,7 @@
     [mode]="isMobile() ? 'over' : 'side'"
     [opened]="sidenavOpen()"
     (openedChange)="sidenavOpen.set($event)">
-    <div class="sidenav-brand">
+    <a routerLink="/" class="sidenav-brand" aria-label="FICE — Accueil">
       <div class="brand-icon">
         <span class="material-icons-round">account_balance</span>
       </div>
@@ -12,7 +12,7 @@
         <span class="brand-name">FICE</span>
         <span class="brand-sub">Back-office</span>
       </div>
-    </div>
+    </a>
 
     <div class="agent-card">
       <div class="agent-avatar">

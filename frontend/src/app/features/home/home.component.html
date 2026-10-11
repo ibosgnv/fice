@@ -2,13 +2,13 @@
 
   <!-- ── Header ── -->
   <header class="site-header">
-    <div class="header-brand">
+    <a routerLink="/" class="header-brand" aria-label="FICE — Accueil">
       <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
       <div>
         <span class="brand-name">FICE</span>
         <span class="brand-tagline">Coopérative d'Épargne</span>
       </div>
-    </div>
+    </a>
     <nav class="site-nav" [class.site-nav--open]="menuOpen()" (click)="menuOpen.set(false)">
       <a
         routerLink="/"

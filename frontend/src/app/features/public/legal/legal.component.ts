@@ -37,7 +37,7 @@ const PAGES: Record<string, { titre: string; contenu: string }> = {
   template: `
     <div class="public-page">
       <div class="public-header">
-        <div class="brand"><span class="material-icons-round">account_balance</span><span>FICE</span></div>
+        <a routerLink="/" class="brand" aria-label="FICE — Accueil"><span class="material-icons-round">account_balance</span><span>FICE</span></a>
         <a routerLink="/" mat-button>← Accueil</a>
       </div>
       <div class="public-content">

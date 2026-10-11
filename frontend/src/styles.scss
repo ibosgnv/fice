@@ -219,6 +219,16 @@ html, body {
   background: #f3f4fc;
 }
 
+// ─── Logo FICE cliquable (lien vers l'accueil) ───────────────────────────────
+a.header-brand,
+a.login-header__brand,
+a.sidenav-brand,
+a.brand {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 // ─── Utilitaires ──────────────────────────────────────────────────────────────
 .text-secondary { color: var(--color-text-secondary); }
 .text-hint      { color: var(--color-text-hint); }

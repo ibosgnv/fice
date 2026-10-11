@@ -5,13 +5,13 @@
     [opened]="sidenavOpen()"
     (openedChange)="sidenavOpen.set($event)">
 
-    <div class="sidenav-brand">
+    <a routerLink="/" class="sidenav-brand" aria-label="FICE — Accueil">
       <div class="brand-icon"><span class="material-icons-round">account_balance</span></div>
       <div class="brand-text">
         <span class="brand-name">FICE</span>
         <span class="brand-sub">{{ 'portal.titre' | t }}</span>
       </div>
-    </div>
+    </a>
 
     <div class="member-card">
       <div class="member-avatar">{{ user()?.prenom?.charAt(0) }}{{ user()?.nom?.charAt(0) }}</div>
