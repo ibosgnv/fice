@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lang-switcher.component';
+import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
 @Component({
   selector: 'app-accueil',
@@ -10,7 +11,8 @@ import { LangSwitcherComponent } from '../../shared/components/lang-switcher/lan
   imports: [
     RouterLink,
     MatIconModule,
-    LangSwitcherComponent
+    LangSwitcherComponent,
+    TranslatePipe
   ],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss'

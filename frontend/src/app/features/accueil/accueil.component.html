@@ -12,7 +12,7 @@
 
       <div class="brand-copy">
         <span class="brand-name">FICE</span>
-        <span class="brand-tagline">Coopérative d'Épargne</span>
+        <span class="brand-tagline">{{ 'acc.tagline' | t }}</span>
       </div>
     </div>
 
@@ -21,41 +21,41 @@
       <a
         routerLink="/"
         class="site-nav__item site-nav__item--active">
-        Accueil
+        {{ 'nav.accueil' | t }}
       </a>
 
       <a
         routerLink="/particuliers"
         class="site-nav__item">
-        Particuliers
+        {{ 'nav.particuliers' | t }}
       </a>
 
       <a
         routerLink="/particuliers"
         fragment="epargne"
         class="site-nav__item">
-        Épargne
+        {{ 'nav.epargne' | t }}
       </a>
 
       <a
         routerLink="/particuliers"
         fragment="simulateur"
         class="site-nav__item">
-        Crédits
+        {{ 'nav.credits' | t }}
       </a>
 
       <a
         routerLink="/particuliers"
         fragment="app"
         class="site-nav__item">
-        Application
+        {{ 'nav.app' | t }}
       </a>
 
       <a
         routerLink="/particuliers"
         fragment="coopera"
         class="site-nav__item">
-        La coopérative
+        {{ 'nav.coopera' | t }}
       </a>
 
     </nav>
@@ -64,19 +64,19 @@
 
       <a routerLink="/agences" class="header-link">
         <mat-icon>location_on</mat-icon>
-        <span>Agences</span>
+        <span>{{ 'nav.agences' | t }}</span>
       </a>
 
       <a routerLink="/aide" class="header-link">
         <mat-icon>help_outline</mat-icon>
-        <span>Aide</span>
+        <span>{{ 'nav.aide' | t }}</span>
       </a>
 
       <app-lang-switcher />
 
       <a routerLink="/connexion" class="member-button">
         <mat-icon>login</mat-icon>
-        <span>Espace Membre</span>
+        <span>{{ 'nav.espace' | t }}</span>
       </a>
 
       <button
@@ -105,31 +105,28 @@
 
         <p class="eyebrow">
           <span></span>
-          ENSEMBLE POUR DEMAIN
+          {{ 'acc.hero.eyebrow' | t }}
         </p>
 
         <h1>
-          Le financement<br>
-          qui fait grandir<br>
-          <strong>vos ambitions</strong>
+          {{ 'acc.hero.titre.1' | t }}<br>
+          {{ 'acc.hero.titre.2' | t }}<br>
+          <strong>{{ 'acc.hero.titre.3' | t }}</strong>
         </h1>
 
         <p class="hero-intro">
-          FICE est une nouvelle coopérative financière pensée pour
-          accompagner les PME, les commerçants et les entrepreneurs
-          congolais avec des solutions simples, accessibles et adaptées
-          aux réalités du terrain.
+          {{ 'acc.hero.intro' | t }}
         </p>
 
         <div class="hero-buttons">
 
           <a routerLink="/" fragment="raison" class="btn-primary">
-            Découvrir FICE
+            {{ 'acc.hero.cta' | t }}
             <mat-icon>arrow_forward</mat-icon>
           </a>
 
           <a routerLink="/" fragment="raison" class="btn-secondary">
-            Notre vision
+            {{ 'acc.hero.vision' | t }}
           </a>
 
         </div>
@@ -139,24 +136,24 @@
           <div class="hero-benefit">
             <mat-icon>groups</mat-icon>
             <span>
-              Proche<br>
-              des entrepreneurs
+              {{ 'acc.hero.b1.1' | t }}<br>
+              {{ 'acc.hero.b1.2' | t }}
             </span>
           </div>
 
           <div class="hero-benefit">
             <mat-icon>verified_user</mat-icon>
             <span>
-              Des solutions<br>
-              accessibles
+              {{ 'acc.hero.b2.1' | t }}<br>
+              {{ 'acc.hero.b2.2' | t }}
             </span>
           </div>
 
           <div class="hero-benefit">
             <mat-icon>trending_up</mat-icon>
             <span>
-              Un impact durable<br>
-              sur nos communautés
+              {{ 'acc.hero.b3.1' | t }}<br>
+              {{ 'acc.hero.b3.2' | t }}
             </span>
           </div>
 
@@ -170,14 +167,14 @@
 
         <img
           src="/assets/accueil/hero-entrepreneure.webp"
-          alt="Entrepreneuse congolaise dans son commerce">
+          [alt]="'acc.hero.img.alt' | t">
 
         <div class="hero-media-overlay"></div>
 
         <p class="hero-handwriting">
-          Entreprendre<br>
-          aujourd’hui,<br>
-          bâtir demain.
+          {{ 'acc.hero.main.1' | t }}<br>
+          {{ 'acc.hero.main.2' | t }}<br>
+          {{ 'acc.hero.main.3' | t }}
           <span></span>
         </p>
 
@@ -194,11 +191,8 @@
           </div>
 
           <div>
-            <h3>Financement adapté</h3>
-            <p>
-              Des solutions conçues selon les réalités
-              des entrepreneurs.
-            </p>
+            <h3>{{ 'acc.panel.1.titre' | t }}</h3>
+            <p>{{ 'acc.panel.1.desc' | t }}</p>
           </div>
 
         </article>
@@ -211,11 +205,8 @@
           </div>
 
           <div>
-            <h3>Accompagnement de proximité</h3>
-            <p>
-              Une relation humaine pour faire grandir
-              vos projets.
-            </p>
+            <h3>{{ 'acc.panel.2.titre' | t }}</h3>
+            <p>{{ 'acc.panel.2.desc' | t }}</p>
           </div>
 
         </article>
@@ -228,18 +219,15 @@
           </div>
 
           <div>
-            <h3>Expertise locale</h3>
-            <p>
-              Une connaissance du Congo enrichie
-              par l’expérience de la diaspora.
-            </p>
+            <h3>{{ 'acc.panel.3.titre' | t }}</h3>
+            <p>{{ 'acc.panel.3.desc' | t }}</p>
           </div>
 
         </article>
 
         <p class="hero-panel-note">
-          Pour un Congo<br>
-          plus prospère
+          {{ 'acc.congo.1' | t }}<br>
+          {{ 'acc.congo.2' | t }}
         </p>
 
       </aside>
@@ -261,29 +249,21 @@
 
       <p class="section-label">
         <span></span>
-        NOTRE RAISON D’ÊTRE
+        {{ 'acc.raison.label' | t }}
       </p>
 
       <h2>
-        Une finance pensée<br>
-        par ceux qui connaissent<br>
-        <strong>le terrain.</strong>
+        {{ 'acc.raison.titre.1' | t }}<br>
+        {{ 'acc.raison.titre.2' | t }}<br>
+        <strong>{{ 'acc.raison.titre.3' | t }}</strong>
       </h2>
 
-      <p>
-        FICE est née d’une ambition : rapprocher les solutions
-        financières des entrepreneurs qui font vivre l’économie
-        congolaise.
-      </p>
+      <p>{{ 'acc.raison.p1' | t }}</p>
 
-      <p>
-        Pensée par des Congolais de la diaspora, la coopérative
-        associe une expérience internationale à une compréhension
-        concrète des réalités locales.
-      </p>
+      <p>{{ 'acc.raison.p2' | t }}</p>
 
       <a routerLink="/" fragment="axes" class="vision-button">
-        En savoir plus sur notre vision
+        {{ 'acc.raison.cta' | t }}
         <mat-icon>arrow_forward</mat-icon>
       </a>
 
@@ -296,7 +276,7 @@
     <img
       class="reason-visual-image"
        src="/assets/accueil/raison-etre-visual.webp"
-      alt="Vision FICE : Congo, diaspora et entrepreneurs">
+      [alt]="'acc.raison.img.alt' | t">
 
   </div>
 </div>
@@ -311,11 +291,8 @@
     </div>
 
     <div>
-      <h3>Proche du terrain</h3>
-      <p>
-        Des solutions pensées à partir des besoins réels
-        des entrepreneurs, PME et commerçants congolais.
-      </p>
+      <h3>{{ 'acc.pilier1.titre' | t }}</h3>
+      <p>{{ 'acc.pilier1.desc' | t }}</p>
     </div>
   </article>
 
@@ -327,14 +304,11 @@
 
     <div>
       <h3>
-        Une initiative portée<br>
-        par la diaspora congolaise
+        {{ 'acc.pilier2.titre.1' | t }}<br>
+        {{ 'acc.pilier2.titre.2' | t }}
       </h3>
 
-      <p>
-        Une vision ouverte sur le monde, construite avec
-        une connaissance approfondie du contexte local.
-      </p>
+      <p>{{ 'acc.pilier2.desc' | t }}</p>
     </div>
   </article>
 
@@ -346,14 +320,11 @@
 
     <div>
       <h3>
-        Une ambition<br>
-        d’inclusion financière
+        {{ 'acc.pilier3.titre.1' | t }}<br>
+        {{ 'acc.pilier3.titre.2' | t }}
       </h3>
 
-      <p>
-        Faciliter l’accès aux services financiers pour soutenir
-        une économie locale plus dynamique et plus équitable.
-      </p>
+      <p>{{ 'acc.pilier3.desc' | t }}</p>
     </div>
   </article>
 
@@ -369,12 +340,12 @@
 
     <p class="section-label">
       <span></span>
-      NOS AXES D’ACTION
+      {{ 'acc.axes.label' | t }}
     </p>
 
     <h2>
-      Des solutions concrètes pour<br>
-      les entrepreneurs d’aujourd’hui et de demain.
+      {{ 'acc.axes.titre.1' | t }}<br>
+      {{ 'acc.axes.titre.2' | t }}
     </h2>
 
 
@@ -385,12 +356,9 @@
           <mat-icon>storefront</mat-icon>
         </div>
 
-        <h3>PME & commerçants</h3>
+        <h3>{{ 'acc.axe1.titre' | t }}</h3>
 
-        <p>
-          Un soutien adapté à vos projets
-          et à votre réalité de terrain.
-        </p>
+        <p>{{ 'acc.axe1.desc' | t }}</p>
       </article>
 
 
@@ -399,12 +367,9 @@
           <mat-icon>monetization_on</mat-icon>
         </div>
 
-        <h3>Micro-crédit</h3>
+        <h3>{{ 'acc.axe2.titre' | t }}</h3>
 
-        <p>
-          Des financements pensés pour développer
-          et dynamiser vos activités.
-        </p>
+        <p>{{ 'acc.axe2.desc' | t }}</p>
       </article>
 
 
@@ -413,12 +378,9 @@
           <mat-icon>savings</mat-icon>
         </div>
 
-        <h3>Épargne & services financiers</h3>
+        <h3>{{ 'acc.axe3.titre' | t }}</h3>
 
-        <p>
-          Des solutions pour préparer et sécuriser
-          l’avenir de vos projets et de vos familles.
-        </p>
+        <p>{{ 'acc.axe3.desc' | t }}</p>
       </article>
 
 
@@ -427,12 +389,9 @@
           <mat-icon>trending_up</mat-icon>
         </div>
 
-        <h3>Accompagnement entrepreneurial</h3>
+        <h3>{{ 'acc.axe4.titre' | t }}</h3>
 
-        <p>
-          Des conseils et un suivi pour renforcer
-          vos capacités et saisir de nouvelles opportunités.
-        </p>
+        <p>{{ 'acc.axe4.desc' | t }}</p>
       </article>
 
     </div>
@@ -444,9 +403,6 @@
   <!-- =====================================================
        CTA FINAL
        ===================================================== -->
-  <!-- =====================================================
-     CTA FINAL
-     ===================================================== -->
 <section class="final-section">
 
   <div class="final-inner">
@@ -455,12 +411,12 @@
 
       <p class="final-label">
         <span></span>
-        REJOIGNEZ L’AVENTURE
+        {{ 'acc.final.label' | t }}
       </p>
 
       <h2>
-        Une nouvelle coopérative financière se prépare.
-        <strong>Faites partie du changement.</strong>
+        {{ 'acc.final.titre' | t }}
+        <strong>{{ 'acc.final.titre.fort' | t }}</strong>
       </h2>
 
       <div class="final-benefits">
@@ -468,24 +424,24 @@
         <div>
           <mat-icon>handshake</mat-icon>
           <span>
-            Ensemble<br>
-            pour entreprendre
+            {{ 'acc.final.b1.1' | t }}<br>
+            {{ 'acc.final.b1.2' | t }}
           </span>
         </div>
 
         <div>
           <mat-icon>groups</mat-icon>
           <span>
-            Pour des communautés<br>
-            plus fortes
+            {{ 'acc.final.b2.1' | t }}<br>
+            {{ 'acc.final.b2.2' | t }}
           </span>
         </div>
 
         <div>
           <mat-icon>eco</mat-icon>
           <span>
-            Pour un Congo<br>
-            plus prospère
+            {{ 'acc.congo.1' | t }}<br>
+            {{ 'acc.congo.2' | t }}
           </span>
         </div>
 
@@ -497,13 +453,13 @@
     <div class="final-action">
 
       <a routerLink="/adhesion">
-        Découvrir le projet FICE
+        {{ 'acc.final.cta' | t }}
         <mat-icon>arrow_forward</mat-icon>
       </a>
 
       <p>
-        « Financer les talents d’aujourd’hui,<br>
-        pour construire le Congo de demain. »
+        {{ 'acc.final.citation.1' | t }}<br>
+        {{ 'acc.final.citation.2' | t }}
       </p>
 
     </div>
@@ -512,7 +468,7 @@
     <img
       class="final-plant"
       src="/assets/accueil/plant-main.webp"
-      alt="Jeune plante symbolisant la croissance">
+      [alt]="'acc.final.img.alt' | t">
 
   </div>
 
